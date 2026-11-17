@@ -53,10 +53,10 @@ blockquote{margin:0 0 12px;padding:12px 16px;background:var(--soft);border-radiu
 <div class="page">
 <h1>Prototype output</h1>
 <p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · <a href="index.html">Home</a> · <a href="architecture.html">Agent Architecture</a></p>
-<p>These ads were made by my prototype from a written brief. For each one: the brief I gave, how the agent made it, and the final output.</p>
-<p class="note">The prototype is being updated right now, so a new run may fail. These outputs come from earlier runs, and their time and cost come from the prototype's own logs. I'll add a fresh recording here once the update is done.</p>
+<p>This ad was made by my prototype from a written brief: the brief I gave, how the agent made it, and the final output.</p>
+<p class="note">The prototype is being updated right now, so a new run may fail. This output comes from an earlier run, and its time and cost come from the prototype's own logs. I'll add a fresh recording here once the update is done.</p>
 
-<h2>Ad 1: Fruit Ninja Classic</h2>
+<h2>Fruit Ninja Classic</h2>
 <div class="feature">
   <div><video controls preload="none" playsinline poster="media/proto-a.jpg" src="media/proto-a.mp4"></video></div>
   <div>
@@ -84,46 +84,6 @@ blockquote{margin:0 0 12px;padding:12px 16px;background:var(--soft);border-radiu
 </table></div>
 <p class="cap" style="margin-top:8px">The planner turned the brief into this shot list and script. The maker cut the gameplay and added the captions, logo and button in code, so nothing was redrawn by an AI model. The reviewer checked each shot and the final cut (5 review rounds), ElevenLabs made the voice, Google Lyria made the music, and the captions were timed from the voice.</p>
 
-<h2>Ad 2: Fruit Ninja Classic, with a splash opener</h2>
-<div class="feature">
-  <div class="small-vid"><video controls preload="none" playsinline poster="media/proto-b.jpg" src="media/proto-b.mp4"></video></div>
-  <div>
-    <p>The same brief, but asking for one abstract fruit splash to open the ad. I gave three follow-ups, for example "The abstract opener can swell or dissolve. Keep it punchy."</p>
-    <p class="script">"Remember this feeling? Slice into Fruit Ninja Classic. Play now."</p>
-    <div class="kv">
-      <div><b>~14 min</b><span>brief to finished ad</span></div>
-      <div><b>$2.35</b><span>real cost, about ₹223</span></div>
-    </div>
-    <p class="cap">Shots: a generated orange splash (4 s), real gameplay (7 s), then the end card (4 s). The generated splash is why it took longer and cost more than Ad 1.</p>
-    <p class="cap"><b>Failure handling, live:</b> the assembly step failed 5 times during this run. Each time the agent showed "This tool did not finish. Recovering saved work and retrying," kept the finished scenes, and the ad still completed.</p>
-  </div>
-</div>
-
-<h2>Ad 3: Dot &amp; Key sunscreen, from one line</h2>
-<div class="feature">
-  <div class="small-vid"><video controls preload="none" playsinline poster="media/proto-c.jpg" src="media/proto-c.mp4"></video></div>
-  <div>
-    <p>I gave only the brand's website link and one line: "can you make an ad on this". The planner wrote the rest: the product, audience, script, shots and call to action.</p>
-    <p class="script">"Meet your morning plus-one. Dot and Key Vitamin C plus E Sunscreen. Keep it close before you head out. Shop Dot and Key."</p>
-    <div class="kv">
-      <div><b>~22 min</b><span>and still in review</span></div>
-      <div><b>$7.67</b><span>real cost, about ₹729</span></div>
-    </div>
-    <p class="cap">Honest result: the reviewer never passed this cut, because of logo and end card problems. Every scene was generated, so it cost 2.5 times its $3 estimate.</p>
-  </div>
-</div>
-
-<h2>What the runs show</h2>
-<div class="tbl"><table>
-  <thead><tr><th>Ad</th><th>Generated scenes</th><th>Time</th><th>Real cost</th></tr></thead>
-  <tbody>
-    <tr><td>1. Fruit Ninja, gameplay only</td><td>None</td><td>~3 min</td><td>₹36</td></tr>
-    <tr><td>2. Fruit Ninja, splash opener</td><td>1</td><td>~14 min</td><td>₹223</td></tr>
-    <tr><td>3. Dot &amp; Key</td><td>All</td><td>~22 min, not passed</td><td>₹729</td></tr>
-  </tbody>
-</table></div>
-<p style="margin-top:12px">Ads built on a studio's real gameplay are fast and cheap, inside our ₹105–315 estimate or below it. Fully generated ads cost far more. That supports building for game studios first: they already have gameplay to reuse.</p>
-<p class="cap">Time is from the job's start to its finish in the prototype's logs. Cost is the prototype's own cost ledger, converted at about ₹95 to $1.</p>
 </div>
 </body>
 </html>
