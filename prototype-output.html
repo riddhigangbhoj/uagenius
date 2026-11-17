@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype Output</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#1b1d22;--muted:#5d6370;--line:#e3e5ea;--soft:#f3f4f7;--accent:#1f5fd1;--us:#e2571f;--us-soft:#fde8de;--good:#1f8f74;--good-soft:#e2f3ee;--bad:#c2410c;--bad-soft:#fdecdf;
+--display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.page{max-width:1100px;margin:0 auto;padding:48px 28px 72px}
+h1{font-family:var(--display);font-size:clamp(32px,4.6vw,46px);line-height:1.08;margin:0 0 10px}
+h2{font-family:var(--display);font-size:24px;margin:40px 0 8px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-family:var(--display);font-size:18px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:780px}
+a{color:var(--accent)}
+.byline{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;margin-top:12px}
+.vid{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;align-content:start}
+video,.vid img{width:100%;border-radius:10px;background:#000;display:block}
+.cap{font-size:14px;color:var(--muted)}
+.pros,.cons{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-top:10px}
+.box{border-radius:12px;padding:14px 16px}
+.box.g{background:var(--good-soft)}.box.b{background:var(--bad-soft)}
+.box h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+.box.g h3{color:var(--good)}.box.b h3{color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px;margin-top:12px}
+.stat{background:var(--soft);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-family:var(--display);font-size:32px;line-height:1.1}
+.stat span{font-size:13.5px;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-size:12.5px;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+.note{background:var(--soft);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;max-width:900px}
+.bad img{border:3px solid var(--bad)}
+@media (max-width:640px){.page{padding:32px 16px 56px}}
+.feature{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:start;margin-top:12px}
+@media (max-width:760px){.feature{grid-template-columns:1fr}}
+blockquote{margin:0 0 12px;padding:12px 16px;background:var(--soft);border-radius:10px;font-size:15px}
+.script{font-family:var(--display);font-size:20px;font-weight:600;line-height:1.35;border-left:4px solid var(--us);padding:4px 0 4px 14px;margin:6px 0 14px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:10px;margin:10px 0}
+.kv div{background:var(--soft);border-radius:10px;padding:10px 12px}.kv b{display:block;font-family:var(--display);font-size:22px}.kv span{font-size:13px;color:var(--muted)}
+.small-vid{max-width:300px}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>Prototype output</h1>
+<p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · <a href="index.html">Home</a> · <a href="architecture.html">Agent Architecture</a></p>
+<p>These ads were made by my prototype from a written brief. For each one: the brief I gave, how the agent made it, and the final output.</p>
+<p class="note">The prototype is being updated right now, so a new run may fail. These outputs come from earlier runs, and their time and cost come from the prototype's own logs. I'll add a fresh recording here once the update is done.</p>
+
+<h2>Ad 1: Fruit Ninja Classic</h2>
+<div class="feature">
+  <div><video controls preload="none" playsinline poster="media/proto-a.jpg" src="media/proto-a.mp4"></video></div>
+  <div>
+    <h3>The brief I gave</h3>
+    <blockquote>"Need a punchy 15s TikTok ad for Fruit Ninja Classic, adults who remember the original. Real slicing gameplay, not fake game scenes. Bright orange and navy. English voice, upbeat instrumental. 9:16 draft. Official product halfbrick.com/games/fruit-ninja and CTA on the App Store. No price or offer claims. Use the attached official logo, gameplay and Libre Franklin font. Keep it simple. Use real gameplay for the opener as well. No generated scenes."</blockquote>
+    <p class="cap">Attached: the official logo, gameplay footage and the font. One follow-up: "Keep the full gameplay frame visible, and keep the captions clear of the score."</p>
+    <h3>The script the agent wrote</h3>
+    <p class="script">"Remember this feeling? Slice fruit. Chase that next combo. Fruit Ninja Classic. Play now."</p>
+    <div class="kv">
+      <div><b>15 s</b><span>ad length, 9:16</span></div>
+      <div><b>~3 min</b><span>brief to finished ad</span></div>
+      <div><b>$0.38</b><span>real cost, about ₹36</span></div>
+    </div>
+  </div>
+</div>
+<h3 style="margin-top:18px">How the agent made it</h3>
+<div class="tbl"><table>
+  <thead><tr><th>Shot</th><th>Length</th><th>What it shows</th><th>Caption</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>2 s</td><td>Real gameplay: a dense fruit wave and the water blade</td><td>Remember this feeling?</td></tr>
+    <tr><td>2</td><td>7 s</td><td>Real gameplay: slicing in the Disco dojo and Koi stage</td><td>Slice fruit. Chase that next combo.</td></tr>
+    <tr><td>3</td><td>3 s</td><td>Real gameplay: the final slicing burst</td><td>Fruit Ninja Classic</td></tr>
+    <tr><td>4</td><td>3 s</td><td>End card: the official logo and an orange "Play now" button</td><td>Play now</td></tr>
+  </tbody>
+</table></div>
+<p class="cap" style="margin-top:8px">The planner turned the brief into this shot list and script. The maker cut the gameplay and added the captions, logo and button in code, so nothing was redrawn by an AI model. The reviewer checked each shot and the final cut (5 review rounds), ElevenLabs made the voice, Google Lyria made the music, and the captions were timed from the voice.</p>
+
+<h2>Ad 2: Fruit Ninja Classic, with a splash opener</h2>
+<div class="feature">
+  <div class="small-vid"><video controls preload="none" playsinline poster="media/proto-b.jpg" src="media/proto-b.mp4"></video></div>
+  <div>
+    <p>The same brief, but asking for one abstract fruit splash to open the ad. I gave three follow-ups, for example "The abstract opener can swell or dissolve. Keep it punchy."</p>
+    <p class="script">"Remember this feeling? Slice into Fruit Ninja Classic. Play now."</p>
+    <div class="kv">
+      <div><b>~14 min</b><span>brief to finished ad</span></div>
+      <div><b>$2.35</b><span>real cost, about ₹223</span></div>
+    </div>
+    <p class="cap">Shots: a generated orange splash (4 s), real gameplay (7 s), then the end card (4 s). The generated splash is why it took longer and cost more than Ad 1.</p>
+    <p class="cap"><b>Failure handling, live:</b> the assembly step failed 5 times during this run. Each time the agent showed "This tool did not finish. Recovering saved work and retrying," kept the finished scenes, and the ad still completed.</p>
+  </div>
+</div>
+
+<h2>Ad 3: Dot &amp; Key sunscreen, from one line</h2>
+<div class="feature">
+  <div class="small-vid"><video controls preload="none" playsinline poster="media/proto-c.jpg" src="media/proto-c.mp4"></video></div>
+  <div>
+    <p>I gave only the brand's website link and one line: "can you make an ad on this". The planner wrote the rest: the product, audience, script, shots and call to action.</p>
+    <p class="script">"Meet your morning plus-one. Dot and Key Vitamin C plus E Sunscreen. Keep it close before you head out. Shop Dot and Key."</p>
+    <div class="kv">
+      <div><b>~22 min</b><span>and still in review</span></div>
+      <div><b>$7.67</b><span>real cost, about ₹729</span></div>
+    </div>
+    <p class="cap">Honest result: the reviewer never passed this cut, because of logo and end card problems. Every scene was generated, so it cost 2.5 times its $3 estimate.</p>
+  </div>
+</div>
+
+<h2>What the runs show</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Ad</th><th>Generated scenes</th><th>Time</th><th>Real cost</th></tr></thead>
+  <tbody>
+    <tr><td>1. Fruit Ninja, gameplay only</td><td>None</td><td>~3 min</td><td>₹36</td></tr>
+    <tr><td>2. Fruit Ninja, splash opener</td><td>1</td><td>~14 min</td><td>₹223</td></tr>
+    <tr><td>3. Dot &amp; Key</td><td>All</td><td>~22 min, not passed</td><td>₹729</td></tr>
+  </tbody>
+</table></div>
+<p style="margin-top:12px">Ads built on a studio's real gameplay are fast and cheap, inside our ₹105–315 estimate or below it. Fully generated ads cost far more. That supports building for game studios first: they already have gameplay to reuse.</p>
+<p class="cap">Time is from the job's start to its finish in the prototype's logs. Cost is the prototype's own cost ledger, converted at about ₹95 to $1.</p>
+</div>
+</body>
+</html>
