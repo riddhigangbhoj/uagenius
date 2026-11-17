@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Me</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#1b1d22;--muted:#5d6370;--line:#e3e5ea;--soft:#f3f4f7;--accent:#1f5fd1;--us:#e2571f;--us-soft:#fde8de;--good:#1f8f74;--good-soft:#e2f3ee;--bad:#c2410c;--bad-soft:#fdecdf;
+--display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.page{max-width:1100px;margin:0 auto;padding:48px 28px 72px}
+h1{font-family:var(--display);font-size:clamp(32px,4.6vw,46px);line-height:1.08;margin:0 0 10px}
+h2{font-family:var(--display);font-size:24px;margin:40px 0 8px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-family:var(--display);font-size:18px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:780px}
+a{color:var(--accent)}
+.byline{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;margin-top:12px}
+.vid{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;align-content:start}
+video,.vid img{width:100%;border-radius:10px;background:#000;display:block}
+.cap{font-size:14px;color:var(--muted)}
+.pros,.cons{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-top:10px}
+.box{border-radius:12px;padding:14px 16px}
+.box.g{background:var(--good-soft)}.box.b{background:var(--bad-soft)}
+.box h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+.box.g h3{color:var(--good)}.box.b h3{color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px;margin-top:12px}
+.stat{background:var(--soft);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-family:var(--display);font-size:32px;line-height:1.1}
+.stat span{font-size:13.5px;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-size:12.5px;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+.note{background:var(--soft);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;max-width:900px}
+.bad img{border:3px solid var(--bad)}
+@media (max-width:640px){.page{padding:32px 16px 56px}}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>Why me</h1>
+<p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · <a href="index.html">Home</a></p>
+<p>At Kinetic Age, I made AI video ads every few days. I've been the user UAgenius is built for. I know the problems because I hit them myself, ad after ad.</p>
+
+<h2>What I made at Kinetic Age</h2>
+<div class="stats">
+  <div class="stat"><b>15</b><span>ads, each with a full cut</span></div>
+  <div class="stat"><b>60+</b><span>full-length cuts and versions</span></div>
+  <div class="stat"><b>201</b><span>raw AI clips, about 26 minutes</span></div>
+  <div class="stat"><b>42</b><span>voiceover clips</span></div>
+  <div class="stat"><b>407</b><span>video files in total</span></div>
+</div>
+<p class="cap" style="margin-top:8px">Counted from my Kinetic Age project folders: weight loss, obesity, PCOD, diabetes, fatty liver, nutrition, and back, knee and neck pain physio.</p>
+
+<h2>Some of the finished ads</h2>
+<div class="grid">
+  <div class="vid"><video controls preload="none" playsinline poster="media/ka-fatty-liver.jpg" src="media/ka-fatty-liver.mp4"></video><div class="cap">Fatty liver, 40 s</div></div>
+  <div class="vid"><video controls preload="none" playsinline poster="media/ka-knee-pain.jpg" src="media/ka-knee-pain.mp4"></video><div class="cap">Knee pain physio, 32 s</div></div>
+  <div class="vid"><video controls preload="none" playsinline poster="media/ka-back-pain.jpg" src="media/ka-back-pain.mp4"></video><div class="cap">Back pain physio, 34 s</div></div>
+  <div class="vid"><video controls preload="none" playsinline poster="media/ka-pcod.jpg" src="media/ka-pcod.mp4"></video><div class="cap">PCOD, 60 s</div></div>
+</div>
+
+<h2>And the ones that went wrong</h2>
+<p>For every finished ad there were many bad clips. These are three of them.</p>
+<div class="grid bad">
+  <div class="vid"><img src="media/ka-fail-mirror.jpg" alt="AI clip where the mirror reflection doesn't match the woman"><div class="cap">The reflection doesn't match the woman in front of the mirror</div></div>
+  <div class="vid"><img src="media/ka-fail-phone.jpg" alt="AI clip with a black phone screen"><div class="cap">The phone "films" the food, but its screen is black</div></div>
+  <div class="vid"><img src="media/ka-fail-phone2.jpg" alt="AI clip with a blank phone screen"><div class="cap">A blank white phone screen where the camera view should be</div></div>
+</div>
+
+<h2>The problems I faced, and what UAgenius does about them</h2>
+<div class="tbl"><table>
+  <thead><tr><th>What I faced</th><th>What UAgenius does</th></tr></thead>
+  <tbody>
+    <tr><td>Re-entering the brand, fonts and logo for every new ad</td><td>Saves the brand once and reuses it</td></tr>
+    <tr><td>Keeping the same person across shots. One PCOD scene took 14 takes</td><td>Saved characters and strict character rules for every shot</td></tr>
+    <tr><td>Many rounds of edits. The PCOD ad went through 6 rough cuts</td><td>The reviewer checks each clip before I see it, so fewer rounds reach me</td></tr>
+    <tr><td>Clips that looked wrong: mirrors, phones, hands</td><td>The reviewer checks every still and clip against a checklist</td></tr>
+  </tbody>
+</table></div>
+</div>
+</body>
+</html>

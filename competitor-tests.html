@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competitor Tests</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#1b1d22;--muted:#5d6370;--line:#e3e5ea;--soft:#f3f4f7;--accent:#1f5fd1;--us:#e2571f;--us-soft:#fde8de;--good:#1f8f74;--good-soft:#e2f3ee;--bad:#c2410c;--bad-soft:#fdecdf;
+--display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.page{max-width:1100px;margin:0 auto;padding:48px 28px 72px}
+h1{font-family:var(--display);font-size:clamp(32px,4.6vw,46px);line-height:1.08;margin:0 0 10px}
+h2{font-family:var(--display);font-size:24px;margin:40px 0 8px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-family:var(--display);font-size:18px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:780px}
+a{color:var(--accent)}
+.byline{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;margin-top:12px}
+.vid{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;align-content:start}
+video,.vid img{width:100%;border-radius:10px;background:#000;display:block}
+.cap{font-size:14px;color:var(--muted)}
+.pros,.cons{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-top:10px}
+.box{border-radius:12px;padding:14px 16px}
+.box.g{background:var(--good-soft)}.box.b{background:var(--bad-soft)}
+.box h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+.box.g h3{color:var(--good)}.box.b h3{color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px;margin-top:12px}
+.stat{background:var(--soft);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-family:var(--display);font-size:32px;line-height:1.1}
+.stat span{font-size:13.5px;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-size:12.5px;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+.note{background:var(--soft);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;max-width:900px}
+.bad img{border:3px solid var(--bad)}
+@media (max-width:640px){.page{padding:32px 16px 56px}}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>Competitor tests</h1>
+<p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · <a href="index.html">Home</a> · <a href="competitors.html">Competitor Teardown</a></p>
+<p>I gave two tools the brief's sample idea: a gym protein-bar ad with a brand logo and an "Order on Blinkit" call to action. Then I asked each for one change, the way a studio would.</p>
+<p class="note">Because of budget, I tested two tools hands-on: Layer and Creatify. The other three (Higgsfield, InVideo, Scenario) are covered from their public docs in the <a href="competitors.html">Competitor Teardown</a>.</p>
+
+<h2>Layer</h2>
+<div class="grid">
+  <div class="vid"><video controls preload="none" playsinline poster="media/layer-1.jpg" src="media/layer-1.mp4"></video><div class="cap">Try 1: "Use the same guy, add this logo, and make him exercise, struggling." The logo is on his tank top.</div></div>
+  <div class="vid"><video controls preload="none" playsinline poster="media/layer-2.jpg" src="media/layer-2.mp4"></video><div class="cap">Try 2: "Now add that logo in the last clip with the Order on Blinkit line." The logo moved to the end, and it was gone from his tank top.</div></div>
+</div>
+<div class="cols">
+  <div class="box g"><h3>What worked</h3><ul class="pros">
+    <li>Fast. The videos were ready quickly.</li>
+    <li>I could pick any scene it made and use it as the reference for my next prompt. It works a bit like memory for the project.</li>
+  </ul></div>
+  <div class="box b"><h3>What broke</h3><ul class="cons">
+    <li>It couldn't keep the logo on the T-shirt. When I asked for the logo at the end, it dropped it from the shirt.</li>
+  </ul></div>
+</div>
+
+<h2>Creatify</h2>
+<div class="grid" style="max-width:640px">
+  <div class="vid"><video controls preload="none" playsinline poster="media/creatify-1.jpg" src="media/creatify-1.mp4"></video><div class="cap">"I want this man to be a woman now." The person changed, but the voice did not.</div></div>
+</div>
+<div class="cols">
+  <div class="box b"><h3>What broke</h3><ul class="cons">
+    <li>The woman still speaks in the man's voice. Only the picture changed.</li>
+    <li>A Creatify watermark covers the whole video. Removing it needs a paid subscription.</li>
+  </ul></div>
+</div>
+
+<h2>What this shows</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Problem I hit</th><th>How UAgenius handles it</th></tr></thead>
+  <tbody>
+    <tr><td>The logo didn't stay where I put it (Layer)</td><td>The brand is saved once. The real logo file is placed in the edit, not drawn by the video model</td></tr>
+    <tr><td>The voice didn't follow the change (Creatify)</td><td>Voice is part of the saved brand, and the reviewer checks voice and picture together</td></tr>
+    <tr><td>Picking a scene as reference helped (Layer)</td><td>We go further: the brand, characters and voice are remembered across every ad, not just one project</td></tr>
+  </tbody>
+</table></div>
+</div>
+</body>
+</html>
