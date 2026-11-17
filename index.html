@@ -6,104 +6,103 @@
 <title>UAgenius</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-:root{--ink:#1b1d22;--muted:#5d6370;--line:#e3e5ea;--soft:#f3f4f7;--panel:#fff;--accent:#1f5fd1;--us:#e2571f;--us-soft:#fde8de;--good:#1f8f74;--good-soft:#e2f3ee;
+:root{--ink:#1b1d22;--muted:#5d6370;--line:#e3e5ea;--soft:#f3f4f7;--accent:#1f5fd1;--us:#e2571f;--us-soft:#fde8de;--good:#1f8f74;--good-soft:#e2f3ee;
 --display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:#fff;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
-.page{max-width:1100px;margin:0 auto;padding:48px 28px 72px}
-h1{font-family:var(--display);font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 10px;letter-spacing:-.01em}
-h2{font-family:var(--display);font-size:26px;margin:48px 0 6px;padding-top:28px;border-top:1px solid var(--line)}
-p{margin:0 0 12px;max-width:760px}
-a{color:var(--accent)}
-.byline{color:var(--muted);font-size:14px}
-.lead{font-size:18px;max-width:780px}
-.answer{border-left:4px solid var(--accent);background:var(--soft);border-radius:0 12px 12px 0;padding:16px 22px;font-family:var(--display);font-size:clamp(18px,2.2vw,21px);font-weight:600;line-height:1.4;max-width:900px;margin:18px 0}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;margin-top:16px}
-.card{border:2px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:8px;align-content:start;background:var(--panel)}
-.card.start{border-color:var(--us);background:var(--us-soft)}
-.num{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-.card.start .num{color:var(--us)}
-.card h3{font-family:var(--display);font-size:20px;margin:0;line-height:1.2}
-.card h3 a{color:var(--ink);text-decoration:none}
-.card h3 a:hover{text-decoration:underline}
-.card p{font-size:14.5px;color:var(--muted);margin:0}
-.card .go{font-weight:600;font-size:14.5px}
-.also{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
-.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:14px}
-table{border-collapse:collapse;width:100%;font-size:14.5px}
-th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-th{background:var(--soft);font-size:12.5px;color:var(--muted);font-weight:600}
-tr:last-child td{border-bottom:0}
-.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--soft);color:var(--muted);white-space:nowrap}
-.tag.ext{background:var(--good-soft);color:var(--good)}
-.soon td{color:var(--muted)}
-.muted{color:var(--muted)}.small{font-size:13.5px}
-@media (max-width:640px){.page{padding:32px 16px 56px}}
-.steps{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
-a.card{text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+body{background:#fff;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;margin:0}
+.page{max-width:1120px;margin:0 auto;padding:28px 28px 32px}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px}
+h1{font-family:var(--display);font-size:clamp(30px,4vw,40px);line-height:1;margin:0}
+.byline{color:var(--muted);font-size:13.5px;margin:6px 0 0}
+.progress{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.bar{width:140px;height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--good);transition:width .3s}
+.answer{border-left:4px solid var(--accent);background:var(--soft);border-radius:0 10px 10px 0;padding:10px 16px;font-family:var(--display);font-size:17px;font-weight:600;line-height:1.35;margin:16px 0 18px}
+h2{font-family:var(--display);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+a.card{position:relative;border:2px solid var(--line);border-radius:12px;padding:12px 14px 14px;display:grid;gap:4px;align-content:start;text-decoration:none;color:var(--ink);background:#fff;transition:border-color .15s,transform .15s}
 a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
-a.card.start:hover{border-color:var(--us)}
-.card .go{color:var(--accent)}
-.card.start .go{color:var(--us)}
-.proto-wrap{margin:28px 0 8px}
-.proto{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;justify-content:center;padding:20px 26px;border-radius:16px;text-decoration:none;color:#fff;font-family:var(--display);font-size:clamp(20px,2.6vw,26px);font-weight:700;
-background:linear-gradient(110deg,#1f5fd1 0%,#3b6fd6 35%,#e2571f 100%);box-shadow:0 10px 30px -10px rgba(31,95,209,.55)}
-.proto::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-100%);animation:shimmer 2.6s ease-in-out infinite}
+a.card.start{border-color:var(--us);background:var(--us-soft)}
+.num{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.start .num{color:var(--us)}
+.card b{font-family:var(--display);font-size:17px;line-height:1.2}
+.proto-wrap{margin:14px 0 18px}
+.proto{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;justify-content:center;padding:14px 20px;border-radius:14px;text-decoration:none;color:#fff;font-family:var(--display);font-size:clamp(18px,2.2vw,22px);font-weight:700;
+background:linear-gradient(110deg,#1f5fd1 0%,#3b6fd6 35%,#e2571f 100%);box-shadow:0 8px 24px -10px rgba(31,95,209,.55)}
+.proto::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-100%);animation:shimmer 2.6s ease-in-out infinite}
 @keyframes shimmer{to{transform:translateX(100%)}}
-.proto:hover{filter:brightness(1.06)}
-.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:99px}
-.live i{width:8px;height:8px;border-radius:50%;background:#7dffb0;box-shadow:0 0 0 0 rgba(125,255,176,.7);animation:pulse 1.6s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(125,255,176,0)}100%{box-shadow:0 0 0 0 rgba(125,255,176,0)}}
-.parr{transition:transform .2s}.proto:hover .parr{transform:translateX(4px)}
-@media (prefers-reduced-motion:reduce){.proto::after,.live i{animation:none}}
+.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.2);padding:3px 9px;border-radius:99px}
+.live i{width:8px;height:8px;border-radius:50%;background:#7dffb0;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(125,255,176,.7)}70%{box-shadow:0 0 0 8px rgba(125,255,176,0)}100%{box-shadow:0 0 0 0 rgba(125,255,176,0)}}
+.more{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+a.doc,span.doc{position:relative;display:grid;gap:2px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;text-decoration:none;color:var(--ink);background:#fff}
+a.doc:hover{border-color:var(--accent)}
+.doc b{font-weight:600;font-size:14.5px}
+.doc span{font-size:12.5px;color:var(--muted)}
+.doc.soon{opacity:.55}
+.tag{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--soft);color:var(--muted);margin-left:4px;vertical-align:1px}
+.seen{border-color:var(--good)!important}
+.seen::after{content:"✓ Opened";position:absolute;top:8px;right:10px;font-size:11px;font-weight:700;color:var(--good);background:var(--good-soft);padding:1px 7px;border-radius:99px}
+.proto.seen{border:0}
+.proto.seen::after{top:50%;transform:translateY(-50%);right:14px;background:rgba(255,255,255,.9)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.more{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.page{padding:22px 16px}.steps,.more{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.proto::before,.live i{animation:none}}
 </style>
 </head>
 <body>
 <div class="page">
-<h1>UAgenius</h1>
-<p class="byline">PM assignment · Riddhi Gangbhoj · Nov 17, 2026</p>
-<p class="lead">An AI agent that turns a brief into a finished, on-brand video ad for mobile game studios. It remembers the studio's brand once, and it reaches studios through AppBroda's distribution.</p>
+<div class="top">
+  <div>
+    <h1>UAgenius</h1>
+    <p class="byline">PM assignment · Riddhi Gangbhoj · Nov 17, 2026</p>
+  </div>
+  <div class="progress"><span id="count">0 opened</span><span class="bar"><i id="fill"></i></span></div>
+</div>
 <div class="answer">UAgenius seems worth experimenting with, because AppBroda gives us distribution. If we can't get retention, we should close the experiment.</div>
 
 <h2>Read in this order</h2>
 <div class="steps">
-  <a class="card start" href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w"><span class="num">Start here</span><h3>Target Audience</h3><span class="go">Open →</span></a>
-  <a class="card" href="build-decision.html"><span class="num">Part 1</span><h3>Should we build UAgenius?</h3><span class="go">Open →</span></a>
-  <a class="card" href="strategy.html"><span class="num">Part 2</span><h3>Product Strategy</h3><span class="go">Open →</span></a>
-  <a class="card" href="architecture.html"><span class="num">Part 3</span><h3>Agent Architecture</h3><span class="go">Open →</span></a>
-  <a class="card" href="unit-economics.html"><span class="num">Part 4</span><h3>Unit Economics</h3><span class="go">Open →</span></a>
+  <a class="card start track" data-id="ta" href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w" target="_blank" rel="noopener"><span class="num">Start here</span><b>Target Audience</b></a>
+  <a class="card track" data-id="p1" href="build-decision.html"><span class="num">Part 1</span><b>Should we build UAgenius?</b></a>
+  <a class="card track" data-id="p2" href="strategy.html"><span class="num">Part 2</span><b>Product Strategy</b></a>
+  <a class="card track" data-id="p3" href="architecture.html"><span class="num">Part 3</span><b>Agent Architecture</b></a>
+  <a class="card track" data-id="p4" href="unit-economics.html"><span class="num">Part 4</span><b>Unit Economics</b></a>
 </div>
 
 <div class="proto-wrap">
-  <a class="proto" href="https://uagenius-demo.westus2.cloudapp.azure.com">
-    <span class="live"><i></i>Live</span>
-    <span class="ptxt">Try the live prototype</span>
-    <span class="parr">→</span>
-  </a>
+  <a class="proto track" data-id="live" href="https://uagenius-demo.westus2.cloudapp.azure.com" target="_blank" rel="noopener"><span class="live"><i></i>Live</span><span>Try the live prototype</span><span>→</span></a>
 </div>
 
-<h2>All documents</h2>
-<div class="tbl"><table>
-  <thead><tr><th>Document</th><th>What's inside</th><th>Part</th></tr></thead>
-  <tbody>
-    <tr><td><a href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w">Target Audience</a> <span class="tag ext">Google Doc</span></td><td>The segment, the pain in numbers, and each studio's score</td><td>Start</td></tr>
-    <tr><td><a href="https://docs.google.com/spreadsheets/d/1q0oVlB90EPIF43SUNu1KX-Rhcb_WWmwb_WHGht-nHI4/edit?gid=0#gid=0">Table 1</a> <span class="tag ext">Google Sheet</span></td><td>The 98 AppBroda game studios with staff size, ad team and score</td><td>Start</td></tr>
-    <tr><td><a href="build-decision.html">Should we build UAgenius?</a></td><td>The build-or-not memo</td><td>1</td></tr>
-    <tr><td><a href="unit-economics.html">Unit Economics</a></td><td>What one ad costs a studio today, what it costs us, our price and the credit packs</td><td>1, 2</td></tr>
-    <tr><td><a href="competitors.html">Competitor Teardown</a></td><td>How Higgsfield, Creatify, InVideo, Layer and Scenario set up their agents, and where a person steps in</td><td>2</td></tr>
-    <tr><td><a href="strategy.html">Product Strategy</a></td><td>The wedge, user stories, success metrics, build order, positioning and moat</td><td>2</td></tr>
-    <tr><td><a href="architecture.html">Agent Architecture</a></td><td>The agent design note and MVP scope</td><td>3</td></tr>
-    <tr><td><a href="https://uagenius-demo.westus2.cloudapp.azure.com">Live prototype</a> <span class="tag ext">App</span></td><td>Brief to finished ad, end to end</td><td>3</td></tr>
-    <tr><td><a href="prototype-output.html">Prototype output</a></td><td>The ad my prototype made: the brief, the script, the shots, and the measured time and cost</td><td>3</td></tr>
-    <tr class="soon"><td>Loom walkthrough <span class="tag">Coming</span></td><td>A 3–5 minute walkthrough of the prototype</td><td>3</td></tr>
-    <tr><td><a href="competitor-tests.html">Competitor tests</a></td><td>What I got from Layer and Creatify, with the videos</td><td>2</td></tr>
-    <tr><td><a href="why-me.html">Why me</a></td><td>The ads I made at Kinetic Age, and the problems I faced</td><td>All</td></tr>
-    <tr class="soon"><td>Our ad vs competitors <span class="tag">Coming</span></td><td>Our finished ad next to the competitor outputs</td><td>3</td></tr>
-    <tr><td><a href="ai-use.html">How I used AI</a></td><td>Tools used, what AI recommended, what I decided and why</td><td>All</td></tr>
-  </tbody>
-</table></div>
+<h2>Supporting documents</h2>
+<div class="more">
+  <a class="doc track" data-id="out" href="prototype-output.html"><b>Prototype output</b><span>The ad it made: brief, script, time, cost</span></a>
+  <a class="doc track" data-id="tests" href="competitor-tests.html"><b>Competitor tests</b><span>Layer and Creatify, with videos</span></a>
+  <a class="doc track" data-id="teardown" href="competitors.html"><b>Competitor Teardown</b><span>How 5 competitors build their agents</span></a>
+  <a class="doc track" data-id="why" href="why-me.html"><b>Why me</b><span>The ads I made at Kinetic Age</span></a>
+  <a class="doc track" data-id="t1" href="https://docs.google.com/spreadsheets/d/1q0oVlB90EPIF43SUNu1KX-Rhcb_WWmwb_WHGht-nHI4/edit?gid=0#gid=0" target="_blank" rel="noopener"><b>Table 1 <span class="tag">Sheet</span></b><span>Score of each studio</span></a>
+  <a class="doc track" data-id="t2" href="https://docs.google.com/spreadsheets/d/13Vesk8UzTWxrcG9LxP1SHpto3VfGZfrUGlKsTCo68wA/edit?gid=0#gid=0" target="_blank" rel="noopener"><b>Table 2 <span class="tag">Sheet</span></b><span>AppBroda game studios, with proof</span></a>
+  <a class="doc track" data-id="ai" href="ai-use.html"><b>How I used AI</b><span>Decision log</span></a>
+  <span class="doc soon"><b>Loom walkthrough</b><span>Coming soon</span></span>
 </div>
+</div>
+<script>
+(function(){
+  var KEY='uagenius-opened', seen={};
+  function load(){try{seen=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){seen={}}}
+  var links=[].slice.call(document.querySelectorAll('.track'));
+  function paint(){
+    var n=0;
+    links.forEach(function(a){var on=!!seen[a.dataset.id];a.classList.toggle('seen',on);if(on)n++});
+    document.getElementById('count').textContent=n+' of '+links.length+' opened';
+    document.getElementById('fill').style.width=(100*n/links.length)+'%';
+  }
+  links.forEach(function(a){a.addEventListener('click',function(){seen[a.dataset.id]=1;try{localStorage.setItem(KEY,JSON.stringify(seen))}catch(e){}paint()})});
+  window.addEventListener('pageshow',function(){load();paint()});
+  load();paint();
+})();
+</script>
 
 </body>
 </html>
