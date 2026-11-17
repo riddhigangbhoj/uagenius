@@ -158,16 +158,30 @@ h3{margin-top:22px}
 .steps .arr{align-self:center;color:var(--muted);font-size:20px}
 @media (max-width:640px){.steps{flex-direction:column}.steps .arr{transform:rotate(90deg);align-self:center}}
 .sl{font-size:11.5px;font-weight:600;white-space:nowrap}
+
+.tg{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:1px 6px;border-radius:99px;vertical-align:1px;white-space:nowrap}
+.tg.v{background:var(--good-soft);color:var(--good)}
+.tg.s{background:var(--warn-soft);color:var(--warn)}
+.tg.e{background:#e8ecf5;color:#3b5fb0}
+
+.newblk{background:#fff8db;border:2px dashed #e0a12c;border-radius:14px;padding:16px 18px;display:grid;gap:14px;margin:8px 0}
+.newblk h2{border-top:0;margin-top:6px;padding-top:0}
+.newtag{justify-self:start;display:inline-block;background:#e0a12c;color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;margin-right:6px}
+.newline{background:#fff8db;border-radius:8px;padding:6px 10px;max-width:none}
+.plainblk{display:contents}
 </style>
 </head>
 <body>
 <div class="page">
 <h1>Should we build UAgenius?</h1>
 <p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · <a href="index.html">Product Strategy</a> · <a href="competitors.html">Competitor Teardown</a> · <a href="unit-economics.html">Unit Economics</a></p>
+<p class="small muted">Labels: <span class="tg v">verified</span> read on the source page · <span class="tg s">secondhand</span> quoted from another source · <span class="tg e">estimate</span> our own estimate or assumption</p>
 
 <h2 style="margin-top:8px;border-top:0;padding-top:0">The answer</h2>
 <p class="wedge">UAgenius seems worth experimenting with, because AppBroda gives us distribution. If we can't get retention, we should close the experiment.</p>
 <p>This product has low margins and high compute costs, and distribution is hard to crack. Our real leverage is AppBroda's relationship with game studios. The detailed reasoning is in the <a href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w">Target Audience doc</a>.</p>
+</div>
+
 <h3>Why margins are a risk</h3>
 <ul class="ev">
   <li>AI companies often run 50–60% gross margins, against 60–80%+ for normal software <a class="sl" href="https://a16z.com/the-new-business-of-ai-and-how-its-different-from-traditional-software/">source</a>. Bessemer's fastest-growing AI startups average about 25%, often negative <a class="sl" href="https://www.bvp.com/atlas/the-state-of-ai-2025">source</a>.</li>
@@ -188,11 +202,11 @@ h3{margin-top:22px}
 
 <h3>The market is growing, and so is the need for ads</h3>
 <ul class="ev">
-  <li><b>84,000+</b> mobile game advertisers were active every month in 2025 <a class="sl" href="https://supercoolcreative.com/blog/how-many-ad-creatives-does-your-mobile-game-need-and-how-to-beat-creative-fatigue/">source</a>.</li>
-  <li>Mobile games spent <b>$25B</b> on ads to win players in 2025, up 3.8% on 2024 <a class="sl" href="https://www.appsflyer.com/resources/reports/gaming-app-marketing-report/">source</a>.</li>
-  <li>Paid installs grew <b>10%</b> and ad impressions grew <b>20%</b> year on year, which AppsFlyer links to AI's impact on gaming ads <a class="sl" href="https://www.appsflyer.com/resources/reports/gaming-app-marketing-report/">source</a>.</li>
-  <li>Studios need a constant stream of new ads. Small teams ship <b>5–15</b> new ad videos a month, and the top advertisers ship <b>70–120 a week</b> <a class="sl" href="https://supercoolcreative.com/blog/how-many-ad-creatives-does-your-mobile-game-need-and-how-to-beat-creative-fatigue/">source</a>. Gaming apps spending $7M+ a quarter run about <b>2,743</b> ad variations each quarter <a class="sl" href="https://www.appsflyer.com/resources/reports/creative-optimization-report-2025/">source</a>.</li>
-  <li>The market for AI video generators is set to grow from <b>$0.79B in 2025 to $3.44B by 2033</b>, about 20% a year (analyst estimate) <a class="sl" href="https://www.grandviewresearch.com/industry-analysis/ai-video-generator-market-report">source</a>.</li>
+  <li><b>84,000+</b> mobile game advertisers were active every month in 2025 <a class="sl" href="https://supercoolcreative.com/blog/how-many-ad-creatives-does-your-mobile-game-need-and-how-to-beat-creative-fatigue/">source</a> <span class="tg s">secondhand</span>.</li>
+  <li>Mobile games spent <b>$25B</b> on ads to win players in 2025, up 3.8% on 2024 <a class="sl" href="https://www.appsflyer.com/resources/reports/gaming-app-marketing-report/">source</a> <span class="tg v">verified</span>.</li>
+  <li>Paid installs grew <b>10%</b> and ad impressions grew <b>20%</b> year on year, which AppsFlyer links to AI's impact on gaming ads <a class="sl" href="https://www.appsflyer.com/resources/reports/gaming-app-marketing-report/">source</a> <span class="tg v">verified</span>.</li>
+  <li>Studios need a constant stream of new ads. Small teams ship <b>5–15</b> new ad videos a month, and the top advertisers ship <b>70–120 a week</b> <a class="sl" href="https://supercoolcreative.com/blog/how-many-ad-creatives-does-your-mobile-game-need-and-how-to-beat-creative-fatigue/">source</a>. Gaming apps spending $7M+ a quarter run about <b>2,743</b> ad variations each quarter <a class="sl" href="https://www.appsflyer.com/resources/reports/creative-optimization-report-2025/">source</a> <span class="tg v">verified</span>.</li>
+  <li>The market for AI video generators is set to grow from <b>$0.79B in 2025 to $3.44B by 2033</b>, about 20% a year (analyst estimate) <a class="sl" href="https://www.grandviewresearch.com/industry-analysis/ai-video-generator-market-report">source</a> <span class="tg e">estimate</span>.</li>
 </ul>
 
 <h2>Quantified pain</h2>
@@ -229,23 +243,56 @@ h3{margin-top:22px}
 <div class="tbl"><table>
   <thead><tr><th>Company</th><th>Money</th><th>Traction</th><th>Distribution and retention</th><th>Their edge over us</th></tr></thead>
   <tbody>
-    <tr><td><b>Higgsfield</b></td><td>$538M raised, valued at $5.4B <a class="sl" href="https://siliconangle.com/2026/08/17/higgsfield-raises-400m-at-5-4-billion-valuation-to-scale-video-and-image-generation-platform/">source</a></td><td>~$230M ARR, 30M+ users <a class="sl" href="https://sacra.com/research/higgsfield-at-230m-arr/">source</a></td><td>Mass self-serve. Retention not public</td><td>Can outspend us on models, ads and price</td></tr>
-    <tr><td><b>HeyGen</b></td><td>$74M raised</td><td>$200M ARR, break-even <a class="sl" href="https://www.upstartsmedia.com/p/exclusive-heygen-200m-arr-without-burn">source</a></td><td>Self-serve. Retention not public</td><td>Profitable, so it can cut prices</td></tr>
-    <tr><td><b>InVideo</b></td><td>$52.5M raised <a class="sl" href="https://inc42.com/?p=452626">source</a></td><td>~$70M ARR <a class="sl" href="https://www.moneycontrol.com/news/business/startup/inside-invideo-s-70-million-arr-growth-story-a-hacker-mindset-entrepreneurial-surge-and-product-market-fit-challenge-12980201.html">source</a></td><td>40% of sign-ups are organic. 2% of users pay <a class="sl" href="https://inc42.com/?p=452626">source</a></td><td>Eight years of brand and organic traffic</td></tr>
-    <tr><td><b>Creatify</b></td><td>~$23M raised <a class="sl" href="https://www.businesswire.com/news/home/20250528506486/en/Creatify-Crosses-$9M-ARR-Raises-$15.5M-Series-A-to-Launch-the-First-End-to-End-AI-Ad-Agent-for-Video">source</a></td><td>$9M ARR in 18 months, 10,000+ teams</td><td>Self-serve plus a managed studio. Retention not public</td><td>Already sells an end-to-end ad agent, with a games page</td></tr>
-    <tr><td><b>Layer</b></td><td>~$8M raised <a class="sl" href="https://www.layer.ai/blog/update-may-25-funding-next-level-video">source</a></td><td>Says 300+ game studios</td><td>Pays partners 10% of first-year sales <a class="sl" href="https://www.layer.ai/partners">source</a></td><td>Already sells to game studios, with playable ads</td></tr>
+    <tr><td><b>Higgsfield</b></td><td>$538M raised, valued at $5.4B <a class="sl" href="https://siliconangle.com/2026/08/17/higgsfield-raises-400m-at-5-4-billion-valuation-to-scale-video-and-image-generation-platform/">source</a> <span class="tg s">secondhand</span></td><td>~$230M ARR, 30M+ users <a class="sl" href="https://sacra.com/research/higgsfield-at-230m-arr/">source</a> <span class="tg s">secondhand</span></td><td>Mass self-serve. Retention not public</td><td>Can outspend us on models, ads and price</td></tr>
+    <tr><td><b>HeyGen</b></td><td>$74M raised</td><td>$200M ARR, break-even <a class="sl" href="https://www.upstartsmedia.com/p/exclusive-heygen-200m-arr-without-burn">source</a> <span class="tg s">secondhand</span></td><td>Self-serve. Retention not public</td><td>Profitable, so it can cut prices</td></tr>
+    <tr><td><b>InVideo</b></td><td>$52.5M raised <a class="sl" href="https://inc42.com/?p=452626">source</a></td><td>~$70M ARR <a class="sl" href="https://www.moneycontrol.com/news/business/startup/inside-invideo-s-70-million-arr-growth-story-a-hacker-mindset-entrepreneurial-surge-and-product-market-fit-challenge-12980201.html">source</a> <span class="tg s">secondhand</span></td><td>40% of sign-ups are organic. 2% of users pay <a class="sl" href="https://inc42.com/?p=452626">source</a> <span class="tg v">verified</span></td><td>Eight years of brand and organic traffic</td></tr>
+    <tr><td><b>Creatify</b></td><td>~$23M raised <a class="sl" href="https://www.businesswire.com/news/home/20250528506486/en/Creatify-Crosses-$9M-ARR-Raises-$15.5M-Series-A-to-Launch-the-First-End-to-End-AI-Ad-Agent-for-Video">source</a></td><td>$9M ARR in 18 months, 10,000+ teams <span class="tg s">secondhand</span></td><td>Self-serve plus a managed studio. Retention not public</td><td>Already sells an end-to-end ad agent, with a games page</td></tr>
+    <tr><td><b>Layer</b></td><td>~$8M raised (sum of two rounds) <a class="sl" href="https://www.layer.ai/blog/update-may-25-funding-next-level-video">source</a> <span class="tg e">estimate</span></td><td>Says 300+ game studios (self-reported) <span class="tg s">secondhand</span></td><td>Pays partners 10% of first-year sales <a class="sl" href="https://www.layer.ai/partners">source</a></td><td>Already sells to game studios, with playable ads</td></tr>
   </tbody>
 </table></div>
 
-<h2>Still to come</h2>
+<div class="plainblk">
+<h3>Pace: what each started as, and what it is now</h3>
+<ul class="ev">
+  <li><b>Higgsfield:</b> started in 2023 as a research team, built a mobile app in 2024, and is now a browser-based video platform with a reported $1B revenue run rate <a class="sl" href="https://dealroom.co/news/135584-how-higgsfield-scaled-to-a-400m-run-rate-in-13-months/">source</a> <span class="tg s">secondhand</span> <a class="sl" href="https://higgsfield.ai/blog/higgsfield-1b-annualized-revenue-run-rate">source</a> <span class="tg v">verified</span></li>
+  <li><b>Creatify:</b> launched in late 2023 as URL-to-video ads with AI avatars, and now sells an AI ad agent and an AI media buyer <a class="sl" href="https://sacra.com/c/creatify/">source</a> <span class="tg s">secondhand</span> <a class="sl" href="https://creatify.ai/blog/introducing-ai-media-buyer-the-ai-agent-that-runs-your-ads">source</a> <span class="tg v">verified</span></li>
+  <li><b>InVideo:</b> started in 2017 as a template video editor, launched InVideo AI in 2023, and now runs a multi-agent video studio <a class="sl" href="https://inc42.com/?p=452626">source</a> <span class="tg v">verified</span> <a class="sl" href="https://invideo.io/news/introducing-expert-agents-invideo-agent-two/">source</a> <span class="tg v">verified</span></li>
+  <li><b>Layer:</b> launched a game-art generator in beta in January 2023, and now makes finished game ads and playable ads <a class="sl" href="https://layer.ai/blog/unleashing-generative-ai-games">source</a> <span class="tg v">verified</span> <a class="sl" href="https://www.layer.ai/motion-designer">source</a> <span class="tg v">verified</span></li>
+  <li><b>Scenario:</b> started in 2021 with custom models trained on a studio's game art, and now adds video and a chat assistant <a class="sl" href="https://techcrunch.com/2023/01/19/scenario-lands-6m-for-its-ai-platform-that-generates-game-art-assets">source</a> <span class="tg v">verified</span> <a class="sl" href="https://www.scenario.com/blog/Scenario-genie-ai-creative-workspace-chat">source</a> <span class="tg v">verified</span></li>
+</ul>
+<p class="muted small">All five moved from a single tool toward a full ad agent within about two years. The window is still open in one corner: none of them is built on an ad network's relationship with game studios.</p>
+
+</div>
+
+<div class="plainblk">
+<h2>Right to win</h2>
+<p class="hl"><b>An advantage: distribution.</b> AppBroda already works with game studios that trust it, so we can reach our first users without paying to find them. The full case is in the <a href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w">Target Audience doc</a>.</p>
+
+<h2>Risks</h2>
+<p>We can't remove these risks completely. This is how we would reduce each one.</p>
 <div class="tbl"><table>
-  <thead><tr><th>Section</th><th>Status</th></tr></thead>
+  <thead><tr><th>Risk</th><th>Why it's real</th><th>How we reduce it</th></tr></thead>
   <tbody>
-    <tr><td><b>Unit economics</b></td><td>To discuss next. It sets the price, which sets the month 12 retention line</td></tr>
-    <tr><td><b>Right to win</b></td><td>Covered in the <a href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w">Target Segment doc</a></td></tr>
-    <tr><td><b>Risk and kill</b></td><td>To discuss next</td></tr>
+    <tr><td><b>Models become a commodity</b></td><td>Anyone can rent the same video models. Layer alone offers 170 of them <a class="sl" href="https://layer.ai/pricing.md">source</a> <span class="tg v">verified</span>, and the top models sit within a few points of each other on quality <a class="sl" href="https://artificialanalysis.ai/video/leaderboard/image-to-video">source</a> <span class="tg v">verified</span></td><td>We don't compete on the model. We compete on brand memory and AppBroda's distribution, which a model can't copy</td></tr>
+    <tr><td><b>Platforms build it themselves</b></td><td>Meta is adding AI video ad tools to Advantage+ <a class="sl" href="https://www.socialmediatoday.com/news/meta-unveils-new-ai-ad-tools-video-generation-business-ais/750984/">source</a> <span class="tg s">secondhand</span>. TikTok's Symphony now turns a brief into a video ad <a class="sl" href="https://dev.to/mattkundo/tiktok-symphony-ai-video-generation-what-advertisers-must-know-mkdm-p2o">source</a> <span class="tg s">secondhand</span>. Google is reportedly adding Veo video to its ad tools <a class="sl" href="https://www.digitalapplied.com/blog/social-media-ai-advertising-april-2026-meta-google">source</a> <span class="tg s">secondhand</span></td><td>Each platform's tool works only inside its own platform. We make one ad that runs on all of them, with the studio's brand kept in one place</td></tr>
+    <tr><td><b>IP and likeness</b></td><td>An AI model can make something that looks like a real person, another brand's logo or someone else's content, and the studio running the ad can be held responsible. Brands were sued over AI ads using real people's likeness in 2026 <a class="sl" href="https://www.thefashionlaw.com/rainbow-says-existing-model-releases-already-cover-ai-generated-ads/">source</a> <span class="tg s">secondhand</span> <a class="sl" href="https://digiday.com/marketing/how-generative-ai-is-changing-creator-contracts-to-prevent-brand-and-copyright-risks">source</a> <span class="tg s">secondhand</span></td><td>We build ads from the studio's own gameplay, characters and logo. The reviewer flags real-looking faces, other brands' logos and copied content. We don't use real people's faces or voices without their consent</td></tr>
   </tbody>
 </table></div>
+
+</div>
+
+<div class="plainblk">
+<h2>Kill criteria: when we would stop</h2>
+<p>These are the signs that would make us close the experiment, not features we would remove.</p>
+<div class="tbl"><table>
+  <thead><tr><th>When</th><th>We stop if</th><th>Why this line</th></tr></thead>
+  <tbody>
+    <tr><td><b>Month 3</b></td><td>Fewer than 30% of paying studios renew after their first month</td><td>Low-retention AI apps renew about 30% the first time, high-retention ones about 58% <a class="sl" href="https://www.revenuecat.com/blog/growth/ai-app-retention-study">source</a> <span class="tg v">verified</span></td></tr>
+    <tr><td><b>Month 9</b></td><td>The retention curve still hasn't flattened</td><td>AI retention curves usually flatten around month 3 <a class="sl" href="https://a16z.com/ai-retention-benchmarks/">source</a> <span class="tg v">verified</span>. Studios that start paying in the first few months pass month 3 by month 4–6, so month 9 gives several months of data to see whether the curve has flattened <span class="tg e">estimate</span></td></tr>
+    <tr><td><b>Month 18</b></td><td>Less than 45% of revenue is kept after a year</td><td>45% is the median for AI products priced at $50–249 a month <a class="sl" href="https://chartmogul.com/reports/saas-retention-the-ai-churn-wave/">source</a> <span class="tg v">verified</span>. Below the median, we are worse than a typical AI tool</td></tr>
+  </tbody>
+</table></div>
+
 </div>
 
 </body>
