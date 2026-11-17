@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UAgenius Competitor Teardown</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a white, wide page. Each company is one row: notes on the left, a two-zone agent diagram on the right with human callouts outside the box */
+:root{
+  color-scheme:light;
+  --bg:#ffffff; --panel:#ffffff; --soft:#f3f4f7; --ink:#171a21; --muted:#5d6472; --line:#e2e5eb;
+  --accent:#1f5fd1; --us:#e2571f; --us-soft:#fde8de;
+  --think:#efeaff; --think-b:#7a5ad6; --make:#e3f5ef; --make-b:#1f8f74;
+  --human:#fff2d6; --human-b:#e0a12c;
+  --good:#1d8a5b; --good-soft:#dcf2e7; --warn:#a86e0a; --warn-soft:#fbefd6; --bad:#c23b3b; --bad-soft:#f9e0e0;
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6}
+.page{max-width:1280px;margin:0 auto;padding-block:44px 80px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(32px,5vw,48px);line-height:1.08}
+h2{font-size:clamp(24px,3vw,30px);margin-top:40px;line-height:1.2;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-size:19px;margin-top:16px}
+p{margin:0;max-width:78ch}
+a{color:var(--accent)}
+.byline{color:var(--muted);font-size:14px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+figcaption{font-size:13px;color:var(--muted);max-width:78ch}
+blockquote{margin:6px 0;border-left:4px solid var(--us);background:var(--us-soft);border-radius:0 12px 12px 0;padding:18px 24px;font-family:var(--display);font-size:clamp(19px,2.4vw,24px);line-height:1.4;font-weight:600;max-width:1000px}
+
+/* company rows */
+.co{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:28px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+.co:last-of-type{border-bottom:0}
+@media (max-width:900px){.co{grid-template-columns:1fr}}
+.notes{display:grid;gap:12px}
+.notes h3{margin:0;font-size:26px}
+.kv{display:grid;gap:2px}
+.kv .lt{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kv p{font-size:15px}
+.srcs{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+
+/* diagram */
+.dia{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:34px}
+.zone-label{grid-column:1;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:10px 16px 4px;border-radius:14px 14px 0 0}
+.zl-think{background:var(--think);color:var(--think-b)}
+.zl-make{background:var(--make);color:var(--make-b);border-radius:0}
+.st{grid-column:1;padding:8px 16px;position:relative}
+.st.think{background:var(--think)}.st.make{background:var(--make)}
+.st.last{border-radius:0 0 14px 14px;padding-bottom:16px}
+.st .box{background:#fff;border:1.5px solid;border-radius:10px;padding:10px 12px;font-size:14.5px;line-height:1.4;position:relative}
+.st.think .box{border-color:var(--think-b)}.st.make .box{border-color:var(--make-b)}
+.st.miss .box{border:2px dashed var(--bad);color:var(--bad);background:#fff}
+.st .box b{font-family:var(--display)}
+.st:not(.last) .box::after{content:"";position:absolute;left:50%;bottom:-17px;width:2px;height:16px;background:currentColor;opacity:.25}
+.divider{grid-column:1;background:linear-gradient(var(--think) 50%,var(--make) 50%);padding:6px 16px}
+.divider span{display:block;text-align:center;font-size:12.5px;font-weight:700;color:#fff;background:var(--ink);border-radius:99px;padding:5px 12px}
+.hm{grid-column:2;align-self:center;position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--human);border:2px solid var(--human-b);border-radius:14px;padding:12px 14px;margin:6px 0}
+.hm::before{content:"";position:absolute;left:-36px;top:50%;width:34px;border-top:2px dashed var(--human-b)}
+.hm .who{flex:none;width:34px;height:34px;border-radius:50%;background:var(--human-b);display:grid;place-items:center}
+.hm .who i{width:18px;height:18px;background:#fff;-webkit-mask:var(--person) center/contain no-repeat;mask:var(--person) center/contain no-repeat}
+.hm .t{display:grid;gap:4px;min-width:0}
+.hm .t b{font-family:var(--display);font-size:15.5px;line-height:1.25}
+.hm .why{position:relative;background:#fff;border-radius:10px;padding:6px 10px 6px 28px;font-size:13.5px;line-height:1.35;color:var(--muted)}
+.hm .why::before{content:"";position:absolute;left:8px;top:8px;width:13px;height:11px;border-radius:3px;background:var(--human-b)}
+.hm .why::after{content:"";position:absolute;left:10px;top:18px;border:4px solid transparent;border-top-color:var(--human-b);border-left-color:var(--human-b)}
+.spacer{grid-column:2}
+@media (max-width:640px){
+  .dia{grid-template-columns:1fr}
+  .hm,.spacer{grid-column:1}
+  .hm{margin:4px 16px 10px 40px}
+  .hm::before{left:-26px;width:24px}
+  .spacer{display:none}
+}
+:root{--person:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='4.5' r='3'/%3E%3Cpath d='M2 15c0-3.6 2.7-6 6-6s6 2.4 6 6z'/%3E%3C/svg%3E")}
+
+/* maps */
+.maps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:28px;align-items:start}
+.mapcol{display:grid;gap:12px;min-width:0}
+.map{position:relative;width:min(100%,480px);aspect-ratio:1/1;background:var(--soft);border-radius:12px;overflow:hidden}
+.map .q2{position:absolute;left:50%;top:0;width:50%;height:50%;background:var(--us-soft)}
+.map .vx,.map .hz{position:absolute;background:#d5d9e1}
+.map .vx{left:50%;top:0;bottom:0;width:1.5px}.map .hz{top:50%;left:0;right:0;height:1.5px}
+.ax{position:absolute;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dot{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;white-space:nowrap}
+.dot i{width:11px;height:11px;border-radius:50%;background:var(--accent);flex:none}
+.dot.us i{width:16px;height:16px;background:var(--us);box-shadow:0 0 0 5px var(--us-soft)}
+.dot.us{font-family:var(--display);font-size:15px;color:var(--us)}
+.dot.flip{flex-direction:row-reverse}
+.dot.pend i{background:transparent;border:2px dashed var(--accent)}
+.dot.pend{color:var(--muted);font-weight:500}
+
+/* tables and blocks */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14px;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-weight:600;font-size:13px;color:var(--muted);background:var(--soft)}
+tr:last-child td{border-bottom:0}
+.never{border:1px solid var(--bad);background:var(--bad-soft);border-radius:12px;padding:14px 18px;max-width:none}
+.wedge{border-left:4px solid var(--accent);background:var(--soft);border-radius:0 12px 12px 0;padding:18px 24px;font-family:var(--display);font-size:clamp(18px,2.2vw,22px);line-height:1.4;font-weight:600;max-width:1000px}
+ul.ev{margin:0;padding-left:20px;display:grid;gap:4px;font-size:15px;max-width:78ch}
+.score{font-family:var(--display);font-weight:700}
+.formula{font-family:var(--display);font-size:18px;font-weight:600;background:var(--soft);border-radius:10px;padding:12px 16px;display:inline-block}
+.lr,.wflow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px 8px}
+.lr .nd,.wflow .wn{flex:1 1 120px;min-width:0;border:2px solid;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.35;display:grid;gap:2px;align-content:start;background:#fff}
+.nt{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.nd.hmn{background:var(--human);border-color:var(--human-b)}
+.nd.thk{background:var(--think);border-color:var(--think-b)}
+.nd.mk{background:var(--make);border-color:var(--make-b)}
+.ar{align-self:center;color:var(--muted);font-size:18px;flex:none}
+.wflow .wn{flex:1 1 180px;border-color:var(--accent);font-family:var(--display);font-size:16px;font-weight:600}
+.wflow .wn .nt{font-family:var(--body);color:var(--accent)}
+.wflow .wn.us{background:var(--us-soft);border-color:var(--us)}
+.wflow .wn.us .nt{color:var(--us)}
+@media (max-width:640px){.lr,.wflow{flex-direction:column}.ar{transform:rotate(90deg)}}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.quotes q{display:block;background:var(--soft);border-radius:12px;padding:14px 16px;font-size:15.5px;line-height:1.45;quotes:"\201C" "\201D"}
+.quotes q::before{content:open-quote;font-family:var(--display);font-size:26px;line-height:0;vertical-align:-8px;color:var(--us);margin-right:2px}
+.quotes q::after{content:close-quote}
+.tree{display:grid;gap:0;margin-top:4px}
+.troot,.tkids,.tmods{border-radius:10px;padding:8px 10px;font-size:13.5px;line-height:1.35;display:grid;gap:3px}
+.troot{background:var(--think);border:2px solid var(--think-b);font-weight:600}
+.troot.alt{background:#fff;border-style:dashed}
+.troot small,.tkids small{font-weight:400;color:var(--muted);font-size:12px}
+.tkids{background:#fff;border:1.5px solid var(--think-b)}
+.tkrow{display:flex;flex-wrap:wrap;gap:5px}
+.tk{font-size:12.5px;padding:2px 9px;border-radius:99px;background:var(--think)}
+.tk.unk{background:var(--soft);color:var(--muted);font-style:italic}
+.tmods{background:var(--make);border:1.5px solid var(--make-b)}
+.tline{width:2px;height:12px;background:var(--think-b);margin-left:22px;opacity:.6}
+.tsep{height:8px}
+.pn{display:block;font-family:var(--display);font-weight:700;font-size:17px;line-height:1.1}
+.pr{display:block;color:var(--muted);font-size:12.5px;line-height:1.35;margin-top:2px}
+.sl{font-size:11.5px;font-weight:600;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>Competitor Teardown</h1>
+<p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · Back to the <a href="index.html">Product Strategy</a></p>
+
+<h2>How each tool's AI agent makes an ad</h2>
+<p>In each picture, the purple part is the agent thinking and planning. The green part is the AI models (like Seedance or Veo) making the ad. The yellow boxes on the right are where a person has to step in, and why.</p>
+<section class="co">
+  <div class="notes">
+    <h3>Layer</h3>
+    <div class="kv"><span class="lt">What it wants to be</span><p>Replace the studio's motion designer: a brief goes in, a finished on-brand game ad comes out.</p></div>
+    <div class="kv"><span class="lt">How the agent is set up</span><p>One main agent plans the ad, and a separate editor agent cuts it together.</p></div>
+    <div class="kv"><span class="lt">Who does what</span><div class="tree" aria-label="Agent hierarchy">
+      <div class="troot"><span class="nt">Main agent</span>Layer agent<small>We infer this. Layer only names the editor.</small></div>
+      <div class="tline"></div>
+      <div class="tkids"><span class="nt">Sub-agents</span><div class="tkrow"><span class="tk">Editor (cuts the ad in code)</span><span class="tk unk">Others not published</span></div></div>
+      <div class="tline"></div>
+      <div class="tmods"><span class="nt">AI models</span>Seedance, Gemini, FLUX, GPT Image</div>
+      
+    </div></div>
+    <div class="kv"><span class="lt">What it remembers</span><p>Your brand kit (logo, fonts, colours), your game's style and past chats.</p></div>
+    <div class="srcs">Sources: <a href="https://www.layer.ai/motion-designer">Motion Designer</a> <a href="https://layer.ai/blog/introducing-layer-mcp-your-creative-os-inside-every-ai-you-use.md">MCP blog</a> <a href="https://www.layer.ai/docs/mcp">MCP docs</a> <a href="https://www.layer.ai">layer.ai</a></div>
+  </div>
+  <div class="dia">
+<div class="zone-label zl-think">The agent plans</div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">You give Layer a store link, some gameplay and your brand kit.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You add the game and the brand</b><span class="why">So the ad uses your real game and your look</span></div></div>
+<div class="st think"><div class="box">Layer's agent fills in a short brief for you and shows the cost.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You approve the brief and the cost</b><span class="why">Nothing runs until you say yes</span></div></div>
+<div class="st think"><div class="box">The agent writes the idea, the scenes and the on-screen text.</div></div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">It shows one picture for each scene.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You check the storyboard (optional)</b><span class="why">Catch a weak idea before video is made</span></div></div>
+<div class="divider"><span>AI models it uses: Seedance and Gemini for video, FLUX and GPT Image for pictures</span></div><div class="spacer"></div>
+<div class="zone-label zl-make">The AI models make it</div><div class="spacer"></div>
+<div class="st make"><div class="box">The AI models make each shot, using your real gameplay.</div></div>
+<div class="spacer"></div>
+<div class="st make"><div class="box">They add voice, subtitles and music.</div></div>
+<div class="spacer"></div>
+<div class="st make"><div class="box">An editor agent cuts the shots into one ad.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You ask for changes in chat</b><span class="why">Fix anything you don't like</span></div></div>
+<div class="st make last"><div class="box">You get the ad in every size. Nothing goes live on its own.</div></div>
+<div class="spacer"></div>
+</div>
+</section>
+<section class="co">
+  <div class="notes">
+    <h3>Creatify</h3>
+    <div class="kv"><span class="lt">What it wants to be</span><p>Own the whole ad loop: make the ad, launch it, read the results and make the next one.</p></div>
+    <div class="kv"><span class="lt">How the agent is set up</span><p>One main agent hands the work to sub-agents, like a small creative team. A second agent runs the ads after launch.</p></div>
+    <div class="kv"><span class="lt">Who does what</span><div class="tree" aria-label="Agent hierarchy">
+      <div class="troot"><span class="nt">Main agent</span>Creatify Agent</div>
+      <div class="tline"></div>
+      <div class="tkids"><span class="nt">Sub-agents</span><div class="tkrow"><span class="tk">Researcher</span><span class="tk">Scriptwriter</span><span class="tk">Casting director</span><span class="tk">Producer</span><span class="tk">Editor</span></div></div>
+      <div class="tline"></div>
+      <div class="tmods"><span class="nt">AI models</span>Aurora, Boreal, Seedance, Kling</div>
+      <div class="tsep"></div><div class="troot alt"><span class="nt">Separate agent</span>AI Media Buyer: runs the ads and reads the results</div>
+    </div></div>
+    <div class="kv"><span class="lt">What it remembers</span><p>Your logo, colours and product facts, and the same characters across ads.</p></div>
+    <div class="srcs">Sources: <a href="https://creatify.ai/blog/introducing-creatify-agent-the-first-creative-agent-designed-to-prevent-hallucinations">Creatify Agent</a> <a href="https://creatify.ai/use-cases/ads-for-games">Ads for games</a> <a href="https://creatify.ai/blog/introducing-ai-media-buyer-the-ai-agent-that-runs-your-ads">AI Media Buyer</a> <a href="https://creatify.ai/pricing">Pricing page</a></div>
+  </div>
+  <div class="dia">
+<div class="zone-label zl-think">The agent plans</div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">You paste a store link or gameplay and pick the type of ad.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You choose the game and the ad type</b><span class="why">So it knows what to make</span></div></div>
+<div class="st think"><div class="box">Creatify's agent splits the job between sub-agents: one researches, one writes the script, one picks the actors, one plans the shoot.</div></div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">It shows you the plan, the script and the characters.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You approve the plan</b><span class="why">So it doesn't make video you'll reject</span></div></div>
+<div class="divider"><span>AI models it uses: Aurora (its own, for actors), Seedance and Kling for video</span></div><div class="spacer"></div>
+<div class="zone-label zl-make">The AI models make it</div><div class="spacer"></div>
+<div class="st make"><div class="box">The AI models cut your real gameplay and add the hook, a voice and an actor.</div></div>
+<div class="spacer"></div>
+<div class="st make"><div class="box">Creatify checks the ad for a wrong logo or wrong text.</div></div>
+<div class="spacer"></div>
+<div class="st make"><div class="box">The ad is ready to launch on Meta, TikTok or Google.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You approve the launch</b><span class="why">Nothing goes live without you</span></div></div>
+<div class="st make last"><div class="box">A second agent watches the results and learns which hooks win.</div></div>
+<div class="spacer"></div>
+</div>
+</section>
+<section class="co">
+  <div class="notes">
+    <h3>InVideo AI</h3>
+    <div class="kv"><span class="lt">What it wants to be</span><p>Let anyone make a full video just by typing. Built for any business, not for games.</p></div>
+    <div class="kv"><span class="lt">How the agent is set up</span><p>One main agent leads a crew of sub-agents, and the sub-agents talk to each other before each task.</p></div>
+    <div class="kv"><span class="lt">Who does what</span><div class="tree" aria-label="Agent hierarchy">
+      <div class="troot"><span class="nt">Main agent</span>Lead agent</div>
+      <div class="tline"></div>
+      <div class="tkids"><span class="nt">Sub-agents</span><div class="tkrow"><span class="tk">Creative producer</span><span class="tk">Camera (DOP)</span><span class="tk">Storyboard</span><span class="tk">Script</span><span class="tk">Casting</span><span class="tk">Voiceover</span><span class="tk">Costume</span><span class="tk">VFX</span></div><small>They talk to each other before each task</small></div>
+      <div class="tline"></div>
+      <div class="tmods"><span class="nt">AI models</span>Seedance, Kling, Veo</div>
+      
+    </div></div>
+    <div class="kv"><span class="lt">What it remembers</span><p>Your brand, looks and characters ("Context"), plus rules you write once ("Playbooks").</p></div>
+    <div class="srcs">Sources: <a href="https://invideo.io/news/introducing-expert-agents-invideo-agent-two/">Expert agents</a> <a href="https://invideo.io/blog/agentic-ai-video-workflow/">Agentic workflow</a> <a href="https://invideo.io/news/introducing-playbooks-invideo-agent-two/">Playbooks</a> <a href="https://invideo.io/blog/how-to-make-best-black-friday-ads/">How to make ads</a></div>
+  </div>
+  <div class="dia">
+<div class="zone-label zl-think">The agent plans</div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">You type what video you want.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You describe the video</b><span class="why">That's the only input it needs</span></div></div>
+<div class="st think"><div class="box">The agent asks you a few questions and shows a plan with the cost.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You answer and accept the plan</b><span class="why">So it understands what you want</span></div></div>
+<div class="st think"><div class="box">Sub-agents write the script and draw the storyboard.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You lock the scenes</b><span class="why">Before any video is made</span></div></div>
+<div class="divider"><span>AI models it uses: Seedance, Kling and Veo for video</span></div><div class="spacer"></div>
+<div class="zone-label zl-make">The AI models make it</div><div class="spacer"></div>
+<div class="st make"><div class="box">The AI models make the video, voice, music and subtitles.</div></div>
+<div class="spacer"></div>
+<div class="st make"><div class="box">You can change it by typing, like "make it slower".</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You type the changes</b><span class="why">Fix it without starting over</span></div></div>
+<div class="st make last"><div class="box">You download the video.</div></div>
+<div class="spacer"></div>
+</div>
+</section>
+<section class="co">
+  <div class="notes">
+    <h3>Scenario</h3>
+    <div class="kv"><span class="lt">What it wants to be</span><p>An AI art engine trained on your game's style. It makes the parts, not the finished ad.</p></div>
+    <div class="kv"><span class="lt">How the agent is set up</span><p>One assistant that runs the tools for you when you ask.</p></div>
+    <div class="kv"><span class="lt">Who does what</span><div class="tree" aria-label="Agent hierarchy">
+      <div class="troot"><span class="nt">Main agent</span>Genie assistant</div>
+      <div class="tline"></div>
+      <div class="tkids"><span class="nt">Sub-agents</span><div class="tkrow"><span class="tk unk">None mentioned</span></div><small>Genie calls 90+ tools directly</small></div>
+      <div class="tline"></div>
+      <div class="tmods"><span class="nt">AI models</span>Veo, Kling, Seedance, Flux</div>
+      
+    </div></div>
+    <div class="kv"><span class="lt">What it remembers</span><p>Your trained art style, plus notes at company, project and personal level.</p></div>
+    <div class="srcs">Sources: <a href="https://help.scenario.com/en/articles/basics-of-model-training">Model training</a> <a href="https://www.scenario.com/blog/Scenario-genie-ai-creative-workspace-chat">Genie</a> <a href="https://help.scenario.com/en/articles/getting-started-with-the-scenario-mcp-server">MCP server</a> <a href="https://www.scenario.com/features/video-generation">Video generation</a></div>
+  </div>
+  <div class="dia">
+<div class="zone-label zl-think">The agent plans</div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">You upload 5 to 15 pictures of your game's art.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You give it your game art</b><span class="why">So it learns your style</span></div></div>
+<div class="st think"><div class="box">Scenario trains a style on your art. This takes 30 minutes to 2 hours.</div></div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">You chat with its assistant, and it picks the right tool and model.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You ask for what you need</b><span class="why">It only runs when you ask</span></div></div>
+<div class="divider"><span>AI models it uses: Veo, Kling and Seedance for video, Flux for pictures</span></div><div class="spacer"></div>
+<div class="zone-label zl-make">The AI models make it</div><div class="spacer"></div>
+<div class="st make"><div class="box">The AI models make images and one short clip in your style.</div></div>
+<div class="spacer"></div>
+<div class="st make last miss"><div class="box">There's no script, voice or edit. The ad isn't finished.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You edit the ad yourself</b><span class="why">Scenario stops at clips</span></div></div>
+</div>
+</section>
+<section class="co">
+  <div class="notes">
+    <h3>Higgsfield</h3>
+    <div class="kv"><span class="lt">What it wants to be</span><p>The most cinematic AI clips per credit, for creators and online shops.</p></div>
+    <div class="kv"><span class="lt">How the agent is set up</span><p>Mostly ready-made templates, plus a newer agent that plans and picks models.</p></div>
+    <div class="kv"><span class="lt">Who does what</span><div class="tree" aria-label="Agent hierarchy">
+      <div class="troot"><span class="nt">Main agent</span>Supercomputer agent</div>
+      <div class="tline"></div>
+      <div class="tkids"><span class="nt">Sub-agents</span><div class="tkrow"><span class="tk unk">Not published</span></div><small>It uses tools like Marketing Studio and Ad Multiplier</small></div>
+      <div class="tline"></div>
+      <div class="tmods"><span class="nt">AI models</span>Seedance, Veo 3, FLUX</div>
+      
+    </div></div>
+    <div class="kv"><span class="lt">What it remembers</span><p>Your saved products, avatars and characters.</p></div>
+    <div class="srcs">Sources: <a href="https://higgsfield.ai/creator-hub/help-center/tools-and-workflows/how-do-i-use-marketing-studio-to-create-video-ads">Marketing Studio</a> <a href="https://higgsfield.ai/creator-hub/help-center/tools/which-higgsfield-tool-should-i-use">Which tool</a> <a href="https://higgsfield.ai/blog/claude-ad-production-end-to-end">Claude workflow</a> <a href="https://higgsfield.ai/creator-hub/help-center/mcp-cli/what-is-higgsfield-mcp">MCP</a></div>
+  </div>
+  <div class="dia">
+<div class="zone-label zl-think">The agent plans</div>
+<div class="spacer"></div>
+<div class="st think"><div class="box">You pick a template or upload an ad you like, then add your product.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You pick the template and product</b><span class="why">So it knows what to copy</span></div></div>
+<div class="st think"><div class="box">Its agent plans the clip, picks a model and shows the cost.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You approve the idea and cost</b><span class="why">Before credits are spent</span></div></div>
+<div class="divider"><span>AI models it uses: Seedance and Veo 3 for video, FLUX for pictures</span></div><div class="spacer"></div>
+<div class="zone-label zl-make">The AI models make it</div><div class="spacer"></div>
+<div class="st make"><div class="box">The AI models make one clip, up to 15 seconds.</div></div>
+<div class="hm"><span class="who"><i></i></span><div class="t"><b>You make it again if it's wrong</b><span class="why">You can't edit inside the clip</span></div></div>
+<div class="st make last miss"><div class="box">There's no multi-scene edit and nothing made for games.</div></div>
+<div class="spacer"></div>
+</div>
+</section>
+</div>
+
+</body>
+</html>
