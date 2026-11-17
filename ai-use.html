@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How I Used AI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#1b1d22;--muted:#5d6370;--line:#e3e5ea;--soft:#f3f4f7;--accent:#1f5fd1;--us:#e2571f;--us-soft:#fde8de;--good:#1f8f74;--good-soft:#e2f3ee;
+--display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+.page{max-width:1100px;margin:0 auto;padding:48px 28px 72px}
+h1{font-family:var(--display);font-size:clamp(32px,4.6vw,46px);line-height:1.08;margin:0 0 10px}
+h2{font-family:var(--display);font-size:24px;margin:40px 0 8px;padding-top:24px;border-top:1px solid var(--line)}
+p{margin:0 0 12px;max-width:780px}
+a{color:var(--accent)}
+.byline{color:var(--muted);font-size:14px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:12px}
+.box{border:2px solid var(--line);border-radius:14px;padding:16px 18px}
+.box.me{border-color:var(--us);background:var(--us-soft)}
+.box h3{font-family:var(--display);font-size:18px;margin:0 0 8px}
+.box ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-size:12.5px;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;min-width:150px}
+td.mine{color:var(--ink);font-weight:600}
+ul.err{padding-left:18px;display:grid;gap:4px;max-width:900px}
+.muted{color:var(--muted)}.small{font-size:13.5px}
+@media (max-width:640px){.page{padding:32px 16px 56px}}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>How I used AI on this project</h1>
+<p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · <a href="index.html">Home</a></p>
+<p>I used AI as a research and writing helper. It collected data, checked sources, did the maths and turned my notes into pages. The questions, the trade-offs and every final call were mine.</p>
+
+<div class="split">
+  <div class="box me"><h3>What I did</h3><ul>
+    <li>Interviewed Hritik at Kinetic Age, an in-house ad maker</li>
+    <li>Built the Target Audience doc and scored AppBroda's 98 game studios in Table 1</li>
+    <li>Tested competitors hands-on and recorded the tests</li>
+    <li>Designed and built the prototype</li>
+    <li>Made every call in the log below</li>
+  </ul></div>
+  <div class="box"><h3>What AI helped with</h3><ul>
+    <li><b>Claude (Claude Code):</b> research, competitor teardowns, first drafts of pages, charts, cost maths, publishing to GitHub Pages</li>
+    <li><b>GPT (Codex, cheap model):</b> collecting facts and quotes with source links, for market size, retention and competitor pricing</li>
+    <li>Web search and Reddit for user complaints and market data</li>
+  </ul></div>
+</div>
+
+<h2>Decision log</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Question</th><th>What AI suggested</th><th>What I decided</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Who do we build for?</td><td>Small game studios</td><td class="mine">Mid-size studios (51–500 staff) with an in-house ad team</td><td>They make enough ads, and one person re-types the brand every time</td></tr>
+    <tr><td>The headline answer</td><td>A plain YES or NO</td><td class="mine">"Seems worth experimenting with… if we can't get retention, we should close it"</td><td>Distribution is our edge, retention is the risk. A hedged call is the honest one</td></tr>
+    <tr><td>Market size</td><td>Count every AppBroda customer</td><td class="mine">Prove with 12 studios, grow to 26, then 84,000+ advertisers</td><td>AppBroda is where we prove it works, not the whole market</td></tr>
+    <tr><td>How UAgenius saves money</td><td>Lower cost per ad by cutting the person's cost</td><td class="mine">Same pay, more ads a month: (pay × efficiency + AI tools) ÷ ads</td><td>We save time, not salaries</td></tr>
+    <tr><td>Price of a 15-second ad</td><td>₹200 per ad</td><td class="mine">₹220–250, close to Layer, Creatify and InVideo</td><td>₹200 was below our ₹210 cost. Price near competitors, not far above</td></tr>
+    <tr><td>Pricing model</td><td>Monthly plans, and not charging for bad tries</td><td class="mine">Credits only (1 credit = 1 second): try once, 1-month and 3-month packs</td><td>Flexible for studios, and no frequent repricing. I also dropped free retries</td></tr>
+    <tr><td>Feature scores</td><td>Patterns confidence 1, same-face effort 4</td><td class="mine">Confidence 2, effort 2</td><td>Strict character rules fix the face, so it's easier than AI scored</td></tr>
+    <tr><td>Moat</td><td>A list of possible moats</td><td class="mine">Retention</td><td>Saved brand memory keeps studios coming back</td></tr>
+    
+    <tr><td>Success metrics</td><td>One metric per user story</td><td class="mine">2 videos in month 1, brand reuse, 50% of videos on the saved brand by day 90, 10 videos a month by month 3</td><td>These show whether the product itself is useful, not just whether studios pay</td></tr>
+  </tbody>
+</table></div>
+
+<h2>How I kept facts honest</h2>
+<p>Every number in the build memo is labelled <b>verified</b> (read on the source page), <b>secondhand</b> (quoted from another source) or <b>estimate</b> (our own assumption), with a link next to it. I asked AI to list every weak number before I finalised the docs.</p>
+</div>
+
+</body>
+</html>
