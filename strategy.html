@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UAgenius Product Strategy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a white, wide page. Each company is one row: notes on the left, a two-zone agent diagram on the right with human callouts outside the box */
+:root{
+  color-scheme:light;
+  --bg:#ffffff; --panel:#ffffff; --soft:#f3f4f7; --ink:#171a21; --muted:#5d6472; --line:#e2e5eb;
+  --accent:#1f5fd1; --us:#e2571f; --us-soft:#fde8de;
+  --think:#efeaff; --think-b:#7a5ad6; --make:#e3f5ef; --make-b:#1f8f74;
+  --human:#fff2d6; --human-b:#e0a12c;
+  --good:#1d8a5b; --good-soft:#dcf2e7; --warn:#a86e0a; --warn-soft:#fbefd6; --bad:#c23b3b; --bad-soft:#f9e0e0;
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6}
+.page{max-width:1280px;margin:0 auto;padding-block:44px 80px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(32px,5vw,48px);line-height:1.08}
+h2{font-size:clamp(24px,3vw,30px);margin-top:40px;line-height:1.2;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-size:19px;margin-top:16px}
+p{margin:0;max-width:78ch}
+a{color:var(--accent)}
+.byline{color:var(--muted);font-size:14px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+figcaption{font-size:13px;color:var(--muted);max-width:78ch}
+blockquote{margin:6px 0;border-left:4px solid var(--us);background:var(--us-soft);border-radius:0 12px 12px 0;padding:18px 24px;font-family:var(--display);font-size:clamp(19px,2.4vw,24px);line-height:1.4;font-weight:600;max-width:1000px}
+
+/* company rows */
+.co{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:28px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+.co:last-of-type{border-bottom:0}
+@media (max-width:900px){.co{grid-template-columns:1fr}}
+.notes{display:grid;gap:12px}
+.notes h3{margin:0;font-size:26px}
+.kv{display:grid;gap:2px}
+.kv .lt{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kv p{font-size:15px}
+.srcs{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+
+/* diagram */
+.dia{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:34px}
+.zone-label{grid-column:1;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:10px 16px 4px;border-radius:14px 14px 0 0}
+.zl-think{background:var(--think);color:var(--think-b)}
+.zl-make{background:var(--make);color:var(--make-b);border-radius:0}
+.st{grid-column:1;padding:8px 16px;position:relative}
+.st.think{background:var(--think)}.st.make{background:var(--make)}
+.st.last{border-radius:0 0 14px 14px;padding-bottom:16px}
+.st .box{background:#fff;border:1.5px solid;border-radius:10px;padding:10px 12px;font-size:14.5px;line-height:1.4;position:relative}
+.st.think .box{border-color:var(--think-b)}.st.make .box{border-color:var(--make-b)}
+.st.miss .box{border:2px dashed var(--bad);color:var(--bad);background:#fff}
+.st .box b{font-family:var(--display)}
+.st:not(.last) .box::after{content:"";position:absolute;left:50%;bottom:-17px;width:2px;height:16px;background:currentColor;opacity:.25}
+.divider{grid-column:1;background:linear-gradient(var(--think) 50%,var(--make) 50%);padding:6px 16px}
+.divider span{display:block;text-align:center;font-size:12.5px;font-weight:700;color:#fff;background:var(--ink);border-radius:99px;padding:5px 12px}
+.hm{grid-column:2;align-self:center;position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--human);border:2px solid var(--human-b);border-radius:14px;padding:12px 14px;margin:6px 0}
+.hm::before{content:"";position:absolute;left:-36px;top:50%;width:34px;border-top:2px dashed var(--human-b)}
+.hm .who{flex:none;width:34px;height:34px;border-radius:50%;background:var(--human-b);display:grid;place-items:center}
+.hm .who i{width:18px;height:18px;background:#fff;-webkit-mask:var(--person) center/contain no-repeat;mask:var(--person) center/contain no-repeat}
+.hm .t{display:grid;gap:4px;min-width:0}
+.hm .t b{font-family:var(--display);font-size:15.5px;line-height:1.25}
+.hm .why{position:relative;background:#fff;border-radius:10px;padding:6px 10px 6px 28px;font-size:13.5px;line-height:1.35;color:var(--muted)}
+.hm .why::before{content:"";position:absolute;left:8px;top:8px;width:13px;height:11px;border-radius:3px;background:var(--human-b)}
+.hm .why::after{content:"";position:absolute;left:10px;top:18px;border:4px solid transparent;border-top-color:var(--human-b);border-left-color:var(--human-b)}
+.spacer{grid-column:2}
+@media (max-width:640px){
+  .dia{grid-template-columns:1fr}
+  .hm,.spacer{grid-column:1}
+  .hm{margin:4px 16px 10px 40px}
+  .hm::before{left:-26px;width:24px}
+  .spacer{display:none}
+}
+:root{--person:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='4.5' r='3'/%3E%3Cpath d='M2 15c0-3.6 2.7-6 6-6s6 2.4 6 6z'/%3E%3C/svg%3E")}
+
+/* maps */
+.maps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:28px;align-items:start}
+.mapcol{display:grid;gap:12px;min-width:0}
+.map{position:relative;width:min(100%,480px);aspect-ratio:1/1;background:var(--soft);border-radius:12px;overflow:hidden}
+.map .q2{position:absolute;left:50%;top:0;width:50%;height:50%;background:var(--us-soft)}
+.map .vx,.map .hz{position:absolute;background:#d5d9e1}
+.map .vx{left:50%;top:0;bottom:0;width:1.5px}.map .hz{top:50%;left:0;right:0;height:1.5px}
+.ax{position:absolute;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dot{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;white-space:nowrap}
+.dot i{width:11px;height:11px;border-radius:50%;background:var(--accent);flex:none}
+.dot.us i{width:16px;height:16px;background:var(--us);box-shadow:0 0 0 5px var(--us-soft)}
+.dot.us{font-family:var(--display);font-size:15px;color:var(--us)}
+.dot.flip{flex-direction:row-reverse}
+.dot.pend i{background:transparent;border:2px dashed var(--accent)}
+.dot.pend{color:var(--muted);font-weight:500}
+
+/* tables and blocks */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14px;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-weight:600;font-size:13px;color:var(--muted);background:var(--soft)}
+tr:last-child td{border-bottom:0}
+.never{border:1px solid var(--bad);background:var(--bad-soft);border-radius:12px;padding:14px 18px;max-width:none}
+.wedge{border-left:4px solid var(--accent);background:var(--soft);border-radius:0 12px 12px 0;padding:18px 24px;font-family:var(--display);font-size:clamp(18px,2.2vw,22px);line-height:1.4;font-weight:600;max-width:1000px}
+ul.ev{margin:0;padding-left:20px;display:grid;gap:4px;font-size:15px;max-width:78ch}
+.score{font-family:var(--display);font-weight:700}
+.formula{font-family:var(--display);font-size:18px;font-weight:600;background:var(--soft);border-radius:10px;padding:12px 16px;display:inline-block}
+.lr,.wflow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px 8px}
+.lr .nd,.wflow .wn{flex:1 1 120px;min-width:0;border:2px solid;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.35;display:grid;gap:2px;align-content:start;background:#fff}
+.nt{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.nd.hmn{background:var(--human);border-color:var(--human-b)}
+.nd.thk{background:var(--think);border-color:var(--think-b)}
+.nd.mk{background:var(--make);border-color:var(--make-b)}
+.ar{align-self:center;color:var(--muted);font-size:18px;flex:none}
+.wflow .wn{flex:1 1 180px;border-color:var(--accent);font-family:var(--display);font-size:16px;font-weight:600}
+.wflow .wn .nt{font-family:var(--body);color:var(--accent)}
+.wflow .wn.us{background:var(--us-soft);border-color:var(--us)}
+.wflow .wn.us .nt{color:var(--us)}
+@media (max-width:640px){.lr,.wflow{flex-direction:column}.ar{transform:rotate(90deg)}}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.quotes q{display:block;background:var(--soft);border-radius:12px;padding:14px 16px;font-size:15.5px;line-height:1.45;quotes:"\201C" "\201D"}
+.quotes q::before{content:open-quote;font-family:var(--display);font-size:26px;line-height:0;vertical-align:-8px;color:var(--us);margin-right:2px}
+.quotes q::after{content:close-quote}
+.tree{display:grid;gap:0;margin-top:4px}
+.troot,.tkids,.tmods{border-radius:10px;padding:8px 10px;font-size:13.5px;line-height:1.35;display:grid;gap:3px}
+.troot{background:var(--think);border:2px solid var(--think-b);font-weight:600}
+.troot.alt{background:#fff;border-style:dashed}
+.troot small,.tkids small{font-weight:400;color:var(--muted);font-size:12px}
+.tkids{background:#fff;border:1.5px solid var(--think-b)}
+.tkrow{display:flex;flex-wrap:wrap;gap:5px}
+.tk{font-size:12.5px;padding:2px 9px;border-radius:99px;background:var(--think)}
+.tk.unk{background:var(--soft);color:var(--muted);font-style:italic}
+.tmods{background:var(--make);border:1.5px solid var(--make-b)}
+.tline{width:2px;height:12px;background:var(--think-b);margin-left:22px;opacity:.6}
+.tsep{height:8px}
+.pn{display:block;font-family:var(--display);font-weight:700;font-size:17px;line-height:1.1}
+.pr{display:block;color:var(--muted);font-size:12.5px;line-height:1.35;margin-top:2px}
+.note{background:var(--soft);border-left:4px solid var(--warn);border-radius:0 10px 10px 0;padding:12px 16px;font-size:15px;max-width:none}
+ul.why{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px;max-width:none}
+.sl{font-size:11.5px;font-weight:600;white-space:nowrap}
+.newwn{background:#fff8db!important;border-style:dashed!important;border-color:#e0a12c!important}
+.newli{background:#fff8db;border-radius:8px;padding:4px 8px}
+.newtag{display:inline-block;background:#e0a12c;color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 8px;border-radius:99px;margin-right:6px}
+.newsec{background:#fff8db;border:2px dashed #e0a12c;border-radius:14px;padding:16px 18px;margin:8px 0}
+.newsec h2{border-top:0;margin-top:8px;padding-top:0}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>UAgenius Product Strategy</h1>
+<p class="byline">UAgenius · Riddhi Gangbhoj · Nov 17, 2026 · How each competitor works: <a href="competitors.html">Competitor Teardown</a></p>
+<h2 style="margin-top:8px;border-top:0;padding-top:0">What all the competitors have in common</h2>
+<div class="lr" role="img" aria-label="Common flow: you give the brief, the main agent plans, sub-agents write the script, storyboard, voice and edit, the agent picks an AI model per shot, the AI models make the ad, you approve, and you get the ad.">
+  <div class="nd hmn"><span class="nt">You</span>Give the brief and your brand</div><span class="ar">→</span>
+  <div class="nd thk"><span class="nt">Main agent</span>Plans the ad and the cost</div><span class="ar">→</span>
+  <div class="nd thk"><span class="nt">Sub-agents</span>Script · storyboard · voice · edit</div><span class="ar">→</span>
+  <div class="nd hmn"><span class="nt">You</span>Approve the plan</div><span class="ar">→</span>
+  <div class="nd thk"><span class="nt">Main agent</span>Picks an AI model for each shot</div><span class="ar">→</span>
+  <div class="nd mk"><span class="nt">AI models</span>Make the shots, voice and music</div><span class="ar">→</span>
+  <div class="nd hmn"><span class="nt">You</span>Ask for changes</div><span class="ar">→</span>
+  <div class="nd mk"><span class="nt">Result</span>The finished ad</div>
+</div>
+<p>Most of them work this way. All five still need a person three or four times per ad, and all five let you pick the AI model yourself if you want. Only Creatify checks the ad for mistakes before you see it.</p>
+
+
+<h2>The wedge</h2>
+<div class="wflow">
+  <div class="wn"><span class="nt">For</span>mid-size game studios</div><span class="ar">→</span>
+  <div class="wn"><span class="nt">Who</span>re-type the brand into every AI video</div><span class="ar">→</span>
+  <div class="wn us"><span class="nt">UAgenius</span>remembers the brand once and makes the whole ad in one go, not one clip at a time</div><span class="ar">→</span>
+  <div class="wn"><span class="nt">Unlike</span>Kling, where you re-type the brand into every prompt, and Higgsfield and Scenario, which make one clip at a time and leave the edit to you</div>
+</div>
+<ul class="ev">
+  <li>Re-typing the brand was "almost 30% of their work" (our interview).</li>
+  <li>The logo, person and voice changing between shots came up in the interview and in 5–6 online sources<a class="sl" href="https://kling.ai/blog/limitations-of-current-ai-video-generation-technology?tab=video-creation"> source</a><a class="sl" href="https://www.reddit.com/r/runwayml/comments/1xvxhm9/after_15_versions_of_one_lipsync_scene_i_wrote_a/"> source</a>.</li>
+  <li>Mid-size studios (51–500 staff) are our top-scored segment in the Target Audience doc.</li>  <li>Kling has no saved brand, and logos drift when the camera moves, so the brand has to be fixed in every prompt <a class="sl" href="https://reddit.com/r/KlingAI_Videos/comments/1sjs2n8/please_help_workflow_and_prompt_for_product_broll/pbp6d2y/">Reddit</a>. Higgsfield makes one clip of up to 15 seconds, and Scenario stops at clips, with no script, voice or edit. Both are in our <a href="competitors.html">Competitor Teardown</a>.</li>
+</ul>
+
+<h2>Our intent</h2>
+<blockquote>UAgenius cuts out the repetitive work of making ads with AI tools. It learns your brand and your game once, so you can turn an idea into a finished video fast, with the same logo, font, colours, character and voice every time.</blockquote>
+<div class="plainsec"><h2>User stories</h2>
+<p>Written for the in-house ad maker at a mid-size game studio.</p>
+<ol class="ev">
+  <li>As an ad maker, I set up my game's logo, fonts, characters and voice <b>once</b>, so I don't re-type them for every ad.</li>
+  <li>As an ad maker, I give an idea in any form (a prompt, a link, a video or a photo) and see the plan and stills before any video is made, so I don't spend credits on the wrong direction.</li>
+  <li>As an ad maker, I can stop or change any shot while the ad is being made, so I stay in control.</li>
+  <li>As an ad maker, I see the credit cost before I approve, so I'm never surprised by the bill.</li>
+  <li>As an ad maker, I download a finished 15- or 30-second ad in each platform's size, ready to upload.</li>
+</ol>
+</div>
+
+<div class="plainsec"><h2>How we know the product works</h2>
+<p>Retention tells us whether studios keep paying. These metrics tell us whether the product itself is useful.</p>
+<div class="tbl"><table>
+  <thead><tr><th>When</th><th>Success metric</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td><b>First month</b></td><td>Each onboarded team makes at least <b>2 videos</b></td><td>They came back after the first try, so the product is part of their work</td></tr>
+    <tr><td><b>First month</b></td><td>Teams reuse the saved brand on their next video</td><td>Brand memory is our wedge. If teams don't reuse it, the wedge isn't working</td></tr>
+    <tr><td><b>90 days</b></td><td>At least <b>50% of videos</b> use the saved brand guidelines with no changes</td><td>The saved brand is good enough to trust without fixing it each time</td></tr>
+    <tr><td><b>After 3 months</b></td><td>Each team makes at least <b>10 videos a month</b> with UAgenius</td><td>Small teams ship 5–15 new ad videos a month <a class="sl" href="https://supercoolcreative.com/blog/how-many-ad-creatives-does-your-mobile-game-need-and-how-to-beat-creative-fatigue/">source</a>. At 10, most of their everyday, smaller-budget ads come through us. Precise ads, like playables, can still be made elsewhere for now</td></tr>
+  </tbody>
+</table></div>
+<p class="muted small">These targets are our own estimates. The first studios will show whether they are too high or too low.</p>
+</div>
+
+<h2>What we build, in order</h2>
+<p>This table is for the MVP. Each feature gets a score, and the highest score gets built first. More features can come later and will be scored the same way.</p>
+<p class="formula">Priority = (Pain × Reach × Confidence) ÷ Effort</p>
+<p class="muted small">Pain 1–5: how much it hurts. Reach 1–5: how many of our studios feel it. Confidence 1–3: 3 = interview plus 5+ sources, 1 = our guess. Effort 1–5: 1 = days, 5 = a separate product.</p>
+<div class="tbl"><table>
+  <thead><tr><th>Feature</th><th>Pain</th><th>Reach</th><th>Confidence</th><th>Effort</th><th>Score</th><th>Decision</th></tr></thead>
+  <tbody>
+    <tr><td><b>Remember the brand</b></td><td><span class="pn">5</span><small class="pr">Almost 30% of their work, per the interview</small></td><td><span class="pn">5</span><small class="pr">Every studio has brand rules to follow</small></td><td><span class="pn">3</span><small class="pr">Interview, and every competitor built a brand kit</small></td><td><span class="pn">1</span><small class="pr">We save the settings once and reuse them</small></td><td class="score">75</td><td><b>Build now</b></td></tr>
+    <tr><td><b>Logo stays correct</b></td><td><span class="pn">5</span><small class="pr">Their minimum need</small></td><td><span class="pn">5</span><small class="pr">Every ad has a logo</small></td><td><span class="pn">3</span><small class="pr">Interview, and Creatify built a logo check</small></td><td><span class="pn">1</span><small class="pr">We place the real logo file in the edit</small></td><td class="score">75</td><td><b>Build now</b></td></tr>
+    <tr><td><b>Same voice in every shot</b></td><td><span class="pn">4</span><small class="pr">Named as one of the hardest parts</small></td><td><span class="pn">4</span><small class="pr">Only ads with a voiceover</small></td><td><span class="pn">3</span><small class="pr">Interview, plus 6 online sources</small></td><td><span class="pn">1</span><small class="pr">One saved voice for every line</small></td><td class="score">48</td><td><b>Build now</b></td></tr>
+    <tr><td><b>Same person in every shot</b></td><td><span class="pn">4</span><small class="pr">Named as one of the hardest parts</small></td><td><span class="pn">3</span><small class="pr">Only ads with a person or character</small></td><td><span class="pn">3</span><small class="pr">Interview, plus 5 online sources</small></td><td><span class="pn">2</span><small class="pr">Faces stay mostly the same with a reference picture. Small changes between clips (hair, clothes, colours) are fixed by sending the same strict character rules every time</small></td><td class="score">18</td><td><b>Build now</b></td></tr>
+    <tr><td><b>Winning-ad patterns from AppBroda data</b></td><td><span class="pn">4</span><small class="pr">Ads that don't win waste ad money</small></td><td><span class="pn">5</span><small class="pr">Every studio wants winning ads</small></td><td><span class="pn">2</span><small class="pr">Every UA team chases winning ads, and Creatify already sells ranking by results. We haven't tested it with our studios yet</small></td><td><span class="pn">3</span><small class="pr">Find trending winners, turn them into templates, keep them updated</small></td><td class="score">13.3</td><td>After the MVP</td></tr>
+    <tr><td><b>Playable ads</b></td><td><span class="pn">4</span><small class="pr">Each one costs $5k–30k today</small></td><td><span class="pn">3</span><small class="pr">Mostly bigger UA teams use them</small></td><td><span class="pn">2</span><small class="pr">A few industry sources, not our interview</small></td><td><span class="pn">5</span><small class="pr">Needs a differently trained agent, maybe its own model</small></td><td class="score">4.8</td><td>Phase 2</td></tr>
+  </tbody>
+</table></div>
+
+<p class="note">These scores come from one interview and online sources. What gaming ads actually need could change them, so we still need a survey of game studios, and AppBroda's data on winning ads might change the answer too.</p>
+
+<h2>What we won't build yet</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Order</th><th>Feature</th><th>Why not in the MVP</th><th>When</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Winning-ad patterns from AppBroda data</td><td>It moves away from the main idea of the product, which is remembering the brand. It's also harder to build. We'd have to find the winning ads that are trending, turn them into suggestion templates, and keep them updated all the time. That's continuous work and moderately difficult.</td><td>Right after the MVP</td></tr>
+    <tr><td>2</td><td>AI avatars and actors</td><td>The MVP doesn't need it. It would also need its own library of avatars and templates, like the patterns feature.</td><td>After the MVP</td></tr>
+    <tr><td>3</td><td>Playable ads</td><td>It's a good format and works well, but it costs a lot. We'd need to train our agent differently, and we might need a separate, more complex model just for playables. So we skip it for the MVP.</td><td>Phase 2</td></tr>
+  </tbody>
+</table></div>
+
+
+<h2>Where we sit against the competitors</h2>
+<p>The brief suggests three pairs of lines: game/app vs. e-commerce, creative control vs. automation, and self-serve vs. managed. We use all three, and add our own: whether the tool remembers your brand.</p>
+<div class="maps">
+  <div class="mapcol">
+    <h3 style="margin-top:0">Map 1: who it's for, and who steers</h3>
+    <div class="map" role="img" aria-label="Map 1. Automated and for games: Layer and UAgenius. Automated and general: InVideo, Creatify. Hands-on and general: Higgsfield. Hands-on and for games: Scenario.">
+      <div class="q2"></div><div class="vx"></div><div class="hz"></div>
+      <span class="ax" style="top:10px;left:50%;transform:translateX(-50%)">AI does it</span>
+      <span class="ax" style="bottom:10px;left:50%;transform:translateX(-50%)">You steer every shot</span>
+      <span class="ax" style="left:10px;bottom:30px">← E-commerce / general</span>
+      <span class="ax" style="right:10px;bottom:30px">Game / app →</span>
+      <span class="dot " style="left:20%;top:22%"><i></i>InVideo</span><span class="dot " style="left:38%;top:30%"><i></i>Creatify</span><span class="dot flip" style="left:72%;top:30%"><i></i>Layer</span><span class="dot us flip" style="left:80%;top:15%"><i></i>UAgenius</span><span class="dot " style="left:22%;top:72%"><i></i>Higgsfield</span><span class="dot flip" style="left:76%;top:72%"><i></i>Scenario</span>
+    </div>
+    <ul class="why"><li><b>Layer:</b> built for games, and its agent makes the whole ad <a class="sl" href="https://www.layer.ai/motion-designer">source</a></li><li><b>Creatify:</b> built for apps and online shops with a games mode, and its agent makes the whole ad <a class="sl" href="https://creatify.ai/use-cases/ads-for-games">source</a></li><li><b>InVideo:</b> built for any business, and its agents make the whole video <a class="sl" href="https://invideo.io/news/introducing-expert-agents-invideo-agent-two/">source</a></li><li><b>Scenario:</b> built for game art, but you steer each image and clip yourself <a class="sl" href="https://help.scenario.com/en/articles/introduction-to-video-generation">source</a></li><li><b>Higgsfield:</b> built for creators and online shops, and you pick a template and remake clips yourself <a class="sl" href="https://higgsfield.ai/creator-hub/help-center/tools-and-workflows/how-do-i-use-marketing-studio-to-create-video-ads">source</a></li></ul>
+  </div>
+  <div class="mapcol">
+    <h3 style="margin-top:0">Map 2: who does the work, and does it remember you</h3>
+    <div class="map" role="img" aria-label="Map 2. Brand set once, mostly self-serve with setup help: UAgenius. Competitors shown as hollow dots until we test them.">
+      <div class="vx"></div><div class="hz"></div>
+      <span class="ax" style="top:10px;left:50%;transform:translateX(-50%)">Brand set once and kept</span>
+      <span class="ax" style="bottom:10px;left:50%;transform:translateX(-50%)">Re-brief the brand every ad</span>
+      <span class="ax" style="left:10px;bottom:30px">← Self-serve</span>
+      <span class="ax" style="right:10px;bottom:30px">Managed →</span>
+      <span class="dot us" style="left:30%;top:14%"><i></i>UAgenius</span><span class="dot pend" style="left:24%;top:36%"><i></i>Layer</span><span class="dot pend flip" style="left:78%;top:34%"><i></i>Creatify</span><span class="dot pend" style="left:18%;top:48%"><i></i>InVideo</span><span class="dot pend" style="left:24%;top:62%"><i></i>Scenario</span><span class="dot pend" style="left:20%;top:76%"><i></i>Higgsfield</span>
+    </div>
+        <ul class="why"><li><b>Layer:</b> self-serve with no seat fees, and it saves a brand reference set <a class="sl" href="https://www.layer.ai/pricing">source</a></li><li><b>Creatify:</b> sells a managed "Studio" service, and its agent locks the logo and colours <a class="sl" href="https://creatify.ai/pricing">source</a></li><li><b>InVideo:</b> self-serve, and it saves brand "Context" and standing rules <a class="sl" href="https://invideo.io/news/introducing-playbooks-invideo-agent-two/">source</a></li><li><b>Scenario:</b> self-serve, and it remembers style and notes, but not a full brand kit <a class="sl" href="https://www.scenario.com/blog/Scenario-genie-ai-creative-workspace-chat">source</a></li><li><b>Higgsfield:</b> self-serve, and it saves products and avatars, but not brand rules <a class="sl" href="https://higgsfield.ai/creator-hub/help-center/tools/which-higgsfield-tool-should-i-use">source</a></li></ul>
+  </div>
+</div>
+
+
+
+
+<h2>18-month moat</h2>
+<p class="formula">Our moat is retention.</p>
+<p>Each advantage below is something we do so that studios keep using UAgenius, and each one gets stronger the longer they stay.</p>
+<div class="tbl"><table>
+  <thead><tr><th>Advantage</th><th>What we'll do, and what it leads to</th><th>When, and why then</th></tr></thead>
+  <tbody>
+    <tr><td><b>Distribution</b></td><td>We'll offer UAgenius first to studios already working with AppBroda, so they try it without a long sales process. They've trusted AppBroda for 1.7 years on average.</td><td><b>Day 1 to month 6.</b> They can be reached on launch day, before we have any other way to sell.</td></tr>
+    <tr><td><b>Brand memory</b></td><td>We'll save each studio's logo, fonts, colours, voice and characters once, so every ad comes out on-brand and leaving means typing it all in again.</td><td><b>From the first ad, stronger every month.</b> Memory grows with each ad, so by month 6 there's a lot to lose.</td></tr>
+    <tr><td><b>Fast iteration</b></td><td>We'll fix what studios complain about every week, so they don't quit. AI tools lose users fast<a class="sl" href="https://www.growthunhinged.com/p/the-ai-churn-wave"> source</a>.</td><td><b>Day 1 to month 18.</b> Most users leave in the first weeks if things go wrong.</td></tr>
+    <tr><td><b>Workflow lock-in</b></td><td>We'll keep briefs, approvals, team members and past ads in UAgenius, so their weekly routine runs through us and switching means rebuilding it.</td><td><b>Month 3 to 12.</b> It takes a few months to build up an ad library and a routine.</td></tr>
+    <tr><td><b>Performance data loop</b></td><td>We'll combine AppBroda's ad data with each studio's results, so their ads get better the longer they stay.</td><td><b>Month 12 to 18.</b> Needs enough ads per genre first.</td></tr>
+    <tr><td><b>Ad platform integrations</b></td><td>We'll send ads straight to ad networks, starting with AppBroda's, and bring results back, so switching tools breaks their pipeline.</td><td><b>Month 12 to 18.</b> Built once the core is stable. The data loop depends on it.</td></tr>
+  </tbody>
+</table></div>
+
+</div>
+
+</body>
+</html>
