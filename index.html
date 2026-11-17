@@ -40,6 +40,23 @@ tr:last-child td{border-bottom:0}
 .soon td{color:var(--muted)}
 .muted{color:var(--muted)}.small{font-size:13.5px}
 @media (max-width:640px){.page{padding:32px 16px 56px}}
+.steps{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
+a.card{text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+a.card.start:hover{border-color:var(--us)}
+.card .go{color:var(--accent)}
+.card.start .go{color:var(--us)}
+.proto-wrap{margin:28px 0 8px}
+.proto{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;justify-content:center;padding:20px 26px;border-radius:16px;text-decoration:none;color:#fff;font-family:var(--display);font-size:clamp(20px,2.6vw,26px);font-weight:700;
+background:linear-gradient(110deg,#1f5fd1 0%,#3b6fd6 35%,#e2571f 100%);box-shadow:0 10px 30px -10px rgba(31,95,209,.55)}
+.proto::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-100%);animation:shimmer 2.6s ease-in-out infinite}
+@keyframes shimmer{to{transform:translateX(100%)}}
+.proto:hover{filter:brightness(1.06)}
+.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:99px}
+.live i{width:8px;height:8px;border-radius:50%;background:#7dffb0;box-shadow:0 0 0 0 rgba(125,255,176,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(125,255,176,0)}100%{box-shadow:0 0 0 0 rgba(125,255,176,0)}}
+.parr{transition:transform .2s}.proto:hover .parr{transform:translateX(4px)}
+@media (prefers-reduced-motion:reduce){.proto::after,.live i{animation:none}}
 </style>
 </head>
 <body>
@@ -50,36 +67,20 @@ tr:last-child td{border-bottom:0}
 <div class="answer">UAgenius seems worth experimenting with, because AppBroda gives us distribution. If we can't get retention, we should close the experiment.</div>
 
 <h2>Read in this order</h2>
-<p class="muted">Each step builds on the one before it. About 25 minutes in total.</p>
 <div class="steps">
-  <div class="card start">
-    <span class="num">Start here</span>
-    <h3><a href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w">Target Audience</a></h3>
-    <p>Who we build for: AppBroda's 98 game studios, scored, and why mid-size studios with an in-house ad team come first.</p>
-    <a class="go" href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w">Open the doc →</a>
-    <div class="also">With it: <a href="https://docs.google.com/spreadsheets/d/1q0oVlB90EPIF43SUNu1KX-Rhcb_WWmwb_WHGht-nHI4/edit?gid=0#gid=0">Table 1, every studio scored</a></div>
-  </div>
-  <div class="card">
-    <span class="num">Part 1</span>
-    <h3><a href="build-decision.html">Should we build UAgenius?</a></h3>
-    <p>The call, market size, pain, the interview and Reddit, competitive pressure, right to win, risks and kill criteria.</p>
-    <a class="go" href="build-decision.html">Read Part 1 →</a>
-    <div class="also">With it: <a href="unit-economics.html">Unit Economics</a></div>
-  </div>
-  <div class="card">
-    <span class="num">Part 2</span>
-    <h3><a href="strategy.html">Product Strategy</a></h3>
-    <p>What competitors have in common, the wedge, user stories, success metrics, what we build and won't build, positioning and the moat.</p>
-    <a class="go" href="strategy.html">Read Part 2 →</a>
-    <div class="also">With it: <a href="competitors.html">Competitor Teardown</a> · <a href="unit-economics.html#pricing">Pricing</a></div>
-  </div>
-  <div class="card">
-    <span class="num">Part 3</span>
-    <h3><a href="architecture.html">Agent Architecture</a></h3>
-    <p>The flow stage by stage, the planner, maker and reviewer, prompts, model choices, loop limits and MVP scope.</p>
-    <a class="go" href="architecture.html">Read Part 3 →</a>
-    <div class="also">Try it: <a href="https://uagenius-demo.westus2.cloudapp.azure.com">Live prototype</a></div>
-  </div>
+  <a class="card start" href="https://docs.google.com/document/d/1f4xa0WlMoF6jk2455xUfjQLhbLDER0kJhtz3s8ZUYXs/edit?tab=t.k1v840mm275w"><span class="num">Start here</span><h3>Target Audience</h3><span class="go">Open →</span></a>
+  <a class="card" href="build-decision.html"><span class="num">Part 1</span><h3>Should we build UAgenius?</h3><span class="go">Open →</span></a>
+  <a class="card" href="strategy.html"><span class="num">Part 2</span><h3>Product Strategy</h3><span class="go">Open →</span></a>
+  <a class="card" href="architecture.html"><span class="num">Part 3</span><h3>Agent Architecture</h3><span class="go">Open →</span></a>
+  <a class="card" href="unit-economics.html"><span class="num">Part 4</span><h3>Unit Economics</h3><span class="go">Open →</span></a>
+</div>
+
+<div class="proto-wrap">
+  <a class="proto" href="https://uagenius-demo.westus2.cloudapp.azure.com">
+    <span class="live"><i></i>Live</span>
+    <span class="ptxt">Try the live prototype</span>
+    <span class="parr">→</span>
+  </a>
 </div>
 
 <h2>All documents</h2>
